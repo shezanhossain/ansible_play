@@ -2,12 +2,12 @@
 - name: Network Getting started with playbook
   hosts: all
   connection: network_cli
-  ansible_network_os: exos
+  ansible_network_os: community.network.exos
   gather_facts: false
 
   tasks:
     - name: create vlan
-      exos_config:
+      community.network.exos_config:
           lines:
               - create vlan "ansible_3"
               - configure vlan ansible_test tag 3
