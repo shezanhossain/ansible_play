@@ -1,6 +1,6 @@
 ---
 - name: Network Getting started with playbook
-  hosts: sw1
+  hosts: all
   connection: network_cli
   ansible_network_os: community.network.exos
   gather_facts: false
