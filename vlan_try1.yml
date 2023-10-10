@@ -6,13 +6,6 @@
   gather_facts: false
 
   tasks:
-    - name: backup config
-      exos_config:
-          backup: yes
-      register: backup_result
-    - name: var_result
-      debug:
-          var: backup_result.backup_path
     - name: create vlan
       exos_config:
           lines:
