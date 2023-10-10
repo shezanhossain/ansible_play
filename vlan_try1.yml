@@ -3,7 +3,6 @@
   hosts: sw1
   connection: network_cli
   gather_facts: false
-  hosts: all
 
   tasks:
     - name: create vlan
