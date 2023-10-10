@@ -1,1 +1,22 @@
-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
+---
+- name: Network Getting started with playbook
+  hosts: sw1
+  connection: network_cli
+  gather_facts: false
+  hosts: all
+
+  tasks:
+    - name: backup config
+      exos_config:
+          backup: yes
+      register: backup_result
+    - name: var_result
+      debug:
+          var: backup_result.backup_path
+    - name: create vlan
+      exos_config:
+          lines:
+              - create vlan "ansible_3"
+              - configure vlan ansible_test tag 3
+              - configure vlan ansible_test add ports 3 tagged
+          save_when: changed
