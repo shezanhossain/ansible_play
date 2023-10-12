@@ -1,2 +1,2 @@
 [sw1]
-192.168.122.5 ansible_user=shezan
+192.168.122.5 ansible_user=shezan ansible_password=cisco
