@@ -9,7 +9,7 @@
     - name: create vlan
       exos_config:
           lines:
-              - create vlan "ansible_4"
-              - configure vlan ansible_test tag 4 
-              - configure vlan ansible_test add ports 4 tagged
+              - create vlan "ansible_69"
+              - configure vlan ansible_test tag 69 
+              - configure vlan ansible_test add ports 9 tagged
           save_when: changed
