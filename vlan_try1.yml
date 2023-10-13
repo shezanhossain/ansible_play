@@ -8,7 +8,5 @@
     - name: Set SNMP sysName
       exos_command:
         commands:
-          - configure snmp sysName {{ lookup('env', 'HOSTNAME_ENV') }}
+          - configure snmp sysName {{ hostname }}
         save_when: changed
-      environment:
-        HOSTNAME_ENV: "{{ lookup('env', 'MY_HOSTNAME') }}"
