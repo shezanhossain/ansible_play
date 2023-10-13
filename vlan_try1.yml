@@ -8,5 +8,5 @@
     - name: create vlan
       exos_config:
           lines:
-            - configure snmp sysName "{{ inventory_hostname }}"
+            - configure snmp sysName sw3
           save_when: changed
