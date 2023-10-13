@@ -5,8 +5,9 @@
   gather_facts: false
 
   tasks:
-    - name: create vlan
-      exos_config:
-          lines:
-            - configure snmp sysName sw3
-          save_when: changed
+    - name: Set SNMP sysName
+      exos_command:
+        commands:
+          - configure snmp sysName {{ lookup('env', 'HOSTNAME_ENV') }}
+        save_when: changed
+
