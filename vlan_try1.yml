@@ -8,5 +8,5 @@
     - name: Set SNMP sysName
       exos_command:
         commands:
-          - configure snmp sysName {{ hostname }}
+          - configure snmp sysName {{ "hostname" }}
         save_when: changed
