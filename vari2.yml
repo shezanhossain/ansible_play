@@ -8,7 +8,7 @@
     - name: Set VLANs
       loop: "{{ (range(1, num_vlans + 1) | map('string')) | list }}"
       debug:
-        msg: "create vlan {{ lookup('env', 'VLAN_NAME_' + item) }}"
+        msg: "create vlan {{'VLAN_NAME_' + item) }}"
 
 
 
