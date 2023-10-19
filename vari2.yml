@@ -4,17 +4,11 @@
   connection: network_cli
   gather_facts: false
 
-  vars:
-    vlans:
-      - ID_1
-      - ID_2
-    
   tasks:
     - name: Set VLANs
+      loop: "{{ range(1, num_vlans + 1) | list }}"
       exos_config:
         lines:
-          - create vlan "{{ item.value }}"
-      loop: "{{ vlans }}"
-
+          - "create vlan {{ vlan_id_' + item }} tag={{ vlan_name_' + item }}"
 
 
