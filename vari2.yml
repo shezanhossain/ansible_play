@@ -13,4 +13,4 @@
       exos_config:
         lines:
           - create vlan {{ item.vlan_name }}
-        loop: {{vlans}}
+        loop: "{{ vlans }}"
