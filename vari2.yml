@@ -11,6 +11,6 @@
     - name: Set VLANs
       exos_config:
         lines:
-          - "create vlan {{ 'ID_' + item }}"
+          - create vlan "{{ 'ID_' + item }}"
       loop: "{{ range(1, vlan_num+1) | map('string') | list }}"
 
