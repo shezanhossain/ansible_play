@@ -10,8 +10,7 @@
       exos_config:
         lines:
           - create vlan {{ lookup('env', 'VLAN_NAME_' + item) }}
-      debug:
-        msg: create vlan {{ lookup('env', 'VLAN_NAME_' + item) }}
+
 
 
 
