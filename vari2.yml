@@ -3,21 +3,14 @@
   hosts: sw1
   connection: network_cli
   gather_facts: false
-
-  vars_prompt:
-    - name: num_vlans
-      prompt: "Enter the number of VLANs"
-      private: no
-    - name: VLAN_NAME
-      prompt: "Enter the VLAN name"
-      private: no
-
+  
   tasks:
     - name: Set VLANs
       loop: "{{ (range(1, num_vlans + 1) | map('string')) | list }}"
+        vars: "VLAN_NAME_"+ item 
       debug:
         msg:
-          - "create vlan {{ VLAN_NAME }}"
+          - "create vlan {{ "VLAN_NAME_"+ item  }}"
 
 
 
