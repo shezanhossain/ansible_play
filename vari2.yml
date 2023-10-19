@@ -13,5 +13,5 @@
     - name: Set VLANs
       exos_config:
         lines:
-          - "create vlan {{ item.vlan_name }}"
-        loop: "{{ vlans }}"
+          - "create vlan {{ external_vlans }}"
+      
