@@ -5,12 +5,19 @@
   gather_facts: false
 
   vars:
-    vlan_num: 2
+    a: { num }
+    vlan_ids: {}
 
   tasks:
+    - name: Generate VLAN IDs
+      set_fact:
+        vlan_ids["ID_" + item] : "{{ item }}"
+      loop: "{{ range(1, a+1) | map('string') | list }}"
+
     - name: Set VLANs
       exos_config:
         lines:
-          - create vlan {{{{ 'ID_' + item }}}}
-      loop: "{{ range(1, vlan_num+1) | map('string') | list }}"
+          - "create vlan {{ item }}"
+      loop: "{{ vlan_ids.keys() | list }}"
+
 
