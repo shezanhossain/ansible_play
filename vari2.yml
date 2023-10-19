@@ -5,7 +5,7 @@
   gather_facts: false
 
   vars:
-    vlan_num: 3
+    vlan_num: 2
 
   tasks:
     - name: Set VLANs
