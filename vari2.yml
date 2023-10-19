@@ -5,7 +5,7 @@
   gather_facts: false
 
   vars:
-    a: { num }
+    a: 2
     vlan_ids: {}
 
   tasks:
