@@ -1,6 +1,7 @@
 ---
 - name: Generate VLAN
   hosts: localhost
+  connection: network_cli
   gather_facts: false
 
   tasks:
