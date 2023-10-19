@@ -10,8 +10,7 @@
 
   tasks:
     - name: Set VLANs
-      ios_command:
-        commands:
-          - "vlan {{ item.vlan_id }}"
-          - "name {{ item.vlan_name }}"
+      exos_config:
+        lines:
+          - "create vlan {{ item.vlan_name }}"
       loop: "{{ vlans }}"
