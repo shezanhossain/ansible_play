@@ -6,7 +6,7 @@
   tasks:
     - name: Set External VLANs
       set_fact:
-        vlans: {{ external_vlans }}
+        vlans: "{{ external_vlans }}"
 
   tasks:
     - name: Set VLANs
