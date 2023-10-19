@@ -7,7 +7,9 @@
   tasks:
     - name: Set VLANs
       loop: "{{ (range(1, num_vlans + 1) | map('string')) | list }}"
-
+      exos_config:
+        lines:
+          - create vlan {{ lookup('env', 'VLAN_NAME_' + item) }}
       debug:
         msg: create vlan {{ lookup('env', 'VLAN_NAME_' + item) }}
 
