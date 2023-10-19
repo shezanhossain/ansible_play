@@ -5,14 +5,16 @@
   gather_facts: false
 
   vars:
-    vlan_names: {}  # Initialize an empty dictionary to store VLAN names
-
+    vlans:
+      - ID_1
+      - ID_2
+    
   tasks:
     - name: Set VLANs
       exos_config:
         lines:
-          - "create vlan {{ item.key }} tag={{ item.value }}"
-      loop: "{{ vlan_names | dict2items }}"
+          - create vlan "{{ item.value }}"
+      loop: "{{ vlan }}"
 
 
 
