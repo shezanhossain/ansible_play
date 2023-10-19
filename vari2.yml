@@ -12,4 +12,4 @@
     - name: Set VLANs
       exos_config:
         lines:
-          - "create vlan {{ item.vlan_name }}
+          - create vlan {{ item.vlan_name }}
