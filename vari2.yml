@@ -1,0 +1,17 @@
+---
+- name: Generate VLAN
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Set External VLANs
+      set_fact:
+        vlans: "{{ external_vlans }}"
+
+  tasks:
+    - name: Set VLANs
+      ios_command:
+        commands:
+          - "vlan {{ item.vlan_id }}"
+          - "name {{ item.vlan_name }}"
+      loop: "{{ vlans }}"
