@@ -24,10 +24,10 @@
           debug:
             msg: 
               - >-
-              {% if lookup('vars', 'TAGGED_' + item, default='').lower() == 'y' %}
-              configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} tagged
-              {% else %}
-              configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} untagged
-              {% endif %}
+                {% if lookup('vars', 'TAGGED_' + item, default='').lower() == 'y' %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} tagged
+                {% else %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} untagged
+                {% endif %}
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
