@@ -10,9 +10,9 @@
         vlan_items: "{{ range(1, num_vlans + 1) | map('string') | list }}"
       block:
 
-        - name: Create VLAN name and tag
-          exos_config:
-            lines: 
+        - name: Create VLAN name and TAG
+          debug:
+            msg: 
               - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
               - >-
                 {% if lookup('vars', 'TAG_ID_' + item, default='') != '' %}
@@ -21,8 +21,8 @@
           loop: "{{ vlan_items }}"
 
         - name: Add Ports to VLAN with or without TAG
-          exos_config:
-            lines: 
+          debug:
+            msg: 
               - >-
                 {% if lookup('vars', 'TAGGED_' + item, default='').lower() == 'y' %}
                 configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} tagged
@@ -31,3 +31,19 @@
                 {% endif %}
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
+
+        
+        - name: Allocate VLAN IP 
+          debug: 
+            msg: 
+              - >-
+                {% if lookup('vars', 'IP_' + item, default='') != '' and lookup('vars', 'SUBNET_' + item, default='') %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} ipaddress {{ lookup('vars', 'IP_' + item) }} {{ lookup('vars', 'SUBNET_' + item) }}
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'IP_' + item, default='') != ''
+          
+                
+              
+          
+
+          
