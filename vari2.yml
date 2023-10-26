@@ -6,7 +6,7 @@
 
   tasks:
     - name: Set VLANs
-      loop: "{{ (range(1, num_vlans + 1) | map('string')) | list }}"
+      loop: "{{ range(1, num_vlans + 1) | map('string') | list }}"
       #vars: {{ "VLAN_NAME_"+ item }}
       vars:
         vlan_name: "{{ lookup('vars', 'VLAN_NAME_' + item) }}"
@@ -14,7 +14,11 @@
       when: port_num is defined and port_num != ""
 
       block:
-        - debug:
-            msg:
+        - name: Debug create vlan
+          debug:
+            msg: 
               - "create vlan {{ vlan_name }}"
+        - name: Debug add ports
+          debug:
+            msg: 
               - "configure vlan {{ vlan_name }} add ports {{ port_num }}"
