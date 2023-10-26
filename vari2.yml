@@ -14,7 +14,7 @@
           debug:
             msg: "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
           loop: "{{ vlan_items }}"
-          when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
+          when: lookup('vars', 'VLAN_NAME_' + item, default='') != ''
 
         - name: Add Ports to VLAN
           debug:
