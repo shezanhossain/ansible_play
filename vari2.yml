@@ -42,7 +42,7 @@
                 configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} ipaddress {{ lookup('vars', 'IP_' + item) }} {{ lookup('vars', 'SUBNET_' + item) }}
                 {% endif %}
           loop: "{{ vlan_items }}"
-          when: lookup('vars', 'IP_' + item, default='') != ''
+          #when: lookup('vars', 'IP_' + item, default='') != ''
           
                 
               
