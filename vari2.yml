@@ -11,11 +11,20 @@
       block:
         - name: Create VLAN
           debug:
-            msg: "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
+            msg: "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} tag {{ lookup('vars', 'TAG_ID_' + item) }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'VLAN_NAME_' + item, default='') != ''
 
         - name: Add Ports to VLAN
+          debug:
+            msg: "configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} untagged"
+          loop: "{{ vlan_items }}"
+          when: 
+            - lookup('vars', 'PORT_NUM_' + item, default='') != ''
+            - lookup
+          
+
+        - name: Add tag to vlan 
           debug:
             msg: "configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }}"
           loop: "{{ vlan_items }}"
