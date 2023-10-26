@@ -5,12 +5,12 @@
   gather_facts: false
 
   tasks:
-    - name: Set VLANs
+    - name: SET VLAN
       vars:
         vlan_items: "{{ range(1, num_vlans + 1) | map('string') | list }}"
       block:
 
-        - name: Create VLAN
+        - name: Create VLAN name and tag
           exos_config:
             lines: 
               - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
@@ -20,7 +20,7 @@
                 {% endif %}
           loop: "{{ vlan_items }}"
 
-        - name: Add Ports to VLAN
+        - name: Add Ports to VLAN with or without TAG
           exos_config:
             lines: 
               - >-
