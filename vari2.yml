@@ -17,6 +17,7 @@
               - >-
                 {% if lookup('vars', 'TAG_ID_' + item, default='') != '' %}
                 configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} tag {{ lookup('vars', 'TAG_ID_' + item) }}
+                {% endif %}
           loop: "{{ vlan_items }}"
 
         - name: Add Ports to VLAN
