@@ -11,8 +11,8 @@
       block:
 
         - name: Create VLAN name and TAG
-          debug:
-            msg: 
+          exos_config:
+            lines: 
               - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
               - >-
                 {% if lookup('vars', 'TAG_ID_' + item, default='') != '' %}
@@ -21,8 +21,8 @@
           loop: "{{ vlan_items }}"
 
         - name: Add Ports to VLAN with or without TAG
-          debug:
-            msg: 
+          exos_config:
+            lines: 
               - >-
                 {% if lookup('vars', 'TAGGED_' + item, default='').lower() == 'y' %}
                 configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} tagged
@@ -35,8 +35,8 @@
         
         - name: Allocate VLAN IP 
           # vlan ip must be set in the quatation (""), like a string
-          debug: 
-            msg: 
+          exos_config: 
+            lines: 
               - >-
                 {% if lookup('vars', 'IP_' + item, default='') != '' and lookup('vars', 'SUBNET_' + item, default='') %}
                 configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} ipaddress {{ lookup('vars', 'IP_' + item) }} {{ lookup('vars', 'SUBNET_' + item) }}
