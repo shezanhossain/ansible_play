@@ -11,8 +11,8 @@
       block:
 
         - name: Create VLAN
-          debug:
-            msg: 
+          exos_config:
+            lines: 
               - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
               - >-
                 {% if lookup('vars', 'TAG_ID_' + item, default='') != '' %}
@@ -21,8 +21,8 @@
           loop: "{{ vlan_items }}"
 
         - name: Add Ports to VLAN
-          debug:
-            msg: 
+          exos_config:
+            lines: 
               - >-
                 {% if lookup('vars', 'TAGGED_' + item, default='').lower() == 'y' %}
                 configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} tagged
