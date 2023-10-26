@@ -11,6 +11,7 @@
       debug:
         msg: 
          - create vlan {{ lookup("vars", "VLAN_NAME_"+ item)  }}
+         - configure {{ lookup("vars", "VLAN_NAME_"+ item) }} add ports 
           
 
 
