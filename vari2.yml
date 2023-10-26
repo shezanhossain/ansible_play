@@ -3,17 +3,18 @@
   hosts: sw1
   connection: network_cli
   gather_facts: false
-  
+
   tasks:
     - name: Set VLANs
       loop: "{{ (range(1, num_vlans + 1) | map('string')) | list }}"
-      debug:
-        vars:
-          vlan_name: "{{ lookup('vars', 'VLAN_NAME_' + item) }}"
-          port_num: "{{ lookup('vars', 'PORT_NUM_' + item) }}"
-        msg: 
-          - "create vlan {{ vlan_name }}"
-          - >-
-            {% if port_num is defined and port_num != None %}
-            configure vlan {{ vlan_name }} add ports {{ port_num }}
-            {% endif %}
+      #vars: {{ "VLAN_NAME_"+ item }}
+      vars:
+        vlan_name: "{{ lookup('vars', 'VLAN_NAME_' + item) }}"
+        port_num: "{{ lookup('vars', 'PORT_NUM_' + item) }}"
+      when: port_num is defined and port_num != ""
+
+      block:
+        - debug:
+            msg:
+              - "create vlan {{ vlan_name }}"
+              - "configure vlan {{ vlan_name }} add ports {{ port_num }}"
