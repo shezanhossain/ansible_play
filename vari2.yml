@@ -10,11 +10,4 @@
       debug:
         msg: 
          - create vlan {{ lookup("vars", "VLAN_NAME_"+ item) }}
-         - "{{ 'configure vlan ' + lookup('vars', 'VLAN_NAME_' + item) + ' add ports ' + lookup('vars', 'PORT_NUM_' + item) if lookup('vars', 'PORT_NUM_' + item) is defined and lookup('vars', 'PORT_NUM_' + item) != None else '' }}"
-
-
-
-
-
-
-
+         - "{{ 'configure vlan ' + lookup('vars', 'VLAN_NAME_' + item | string) + ' add ports ' + lookup('vars', 'PORT_NUM_' + item | string) if lookup('vars', 'PORT_NUM_' + item | string) is defined and lookup('vars', 'PORT_NUM_' + item | string) != None else '' }}"
