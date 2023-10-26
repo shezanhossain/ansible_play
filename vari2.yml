@@ -5,17 +5,15 @@
   gather_facts: false
 
   tasks:
-    - name: Set VLANs
-      block:
+  
+    - name: Create VLAN
+      loop: "{{ (range(1, num_vlans + 1) | map('string')) | list }}"
+      debug:
+        msg: "create vlan {{ lookup("vars", "VLAN_NAME_"+ item)  }}"
+      when: lookup('vars', 'VLAN_NAME_' + item, default='') != ''
 
-        - name: Create VLAN
-          loop: "{{ (range(1, num_vlans + 1) | map('string')) | list }}"
-          debug:
-            msg: "create vlan {{ lookup("vars", "VLAN_NAME_"+ item)  }}"
-          when: lookup('vars', 'VLAN_NAME_' + item, default='') != ''
-
-        - name: Add Ports to VLAN
-          loop: "{{ (range(1, num_vlans + 1) | map('string')) | list }}"
-          debug:
-            msg: "configure vlan {{ lookup("vars", "VLAN_NAME_"+ item)  }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }}"
-          when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
+    - name: Add Ports to VLAN
+      loop: "{{ (range(1, num_vlans + 1) | map('string')) | list }}"
+      debug:
+        msg: "configure vlan {{ lookup("vars", "VLAN_NAME_"+ item)  }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }}"
+      when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
