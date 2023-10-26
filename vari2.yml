@@ -8,6 +8,12 @@
     - name: Set VLANs
       loop: "{{ (range(1, num_vlans + 1) | map('string')) | list }}"
       debug:
+        vars:
+          vlan_name: "{{ lookup('vars', 'VLAN_NAME_' + item) }}"
+          port_num: "{{ lookup('vars', 'PORT_NUM_' + item) }}"
         msg: 
-         - create vlan {{ lookup("vars", "VLAN_NAME_"+ item) }}
-         - "{{ 'configure vlan ' + lookup('vars', 'VLAN_NAME_' + item | string) + ' add ports ' + lookup('vars', 'PORT_NUM_' + item | string) if lookup('vars', 'PORT_NUM_' + item | string) is defined and lookup('vars', 'PORT_NUM_' + item | string) != None else '' }}"
+          - "create vlan {{ vlan_name }}"
+          - >-
+            {% if port_num is defined and port_num != None %}
+            configure vlan {{ vlan_name }} add ports {{ port_num }}
+            {% endif %}
