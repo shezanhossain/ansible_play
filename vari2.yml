@@ -34,6 +34,7 @@
 
         
         - name: Allocate VLAN IP 
+          # vlan ip must be set in the quatation (""), like a string
           debug: 
             msg: 
               - >-
