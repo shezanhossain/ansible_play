@@ -13,16 +13,20 @@
         - name: Create VLAN
           debug:
             msg: 
+              - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
               - >-
                 {% if lookup('vars', 'TAG_ID_' + item, default='') != '' %}
-                create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} tag {{ lookup('vars', 'TAG_ID_' + item) }}
-                {% else %}
-                create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}
-                {% endif %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} tag {{ lookup('vars', 'TAG_ID_' + item) }}
           loop: "{{ vlan_items }}"
 
         - name: Add Ports to VLAN
           debug:
-            msg: "configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }}"
+            msg: 
+              - >-
+               {% if lookup('vars', 'TAGGED_' + item, default='').lower() == 'y' %}
+               configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} tagged
+               {% else %}
+               configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} untagged
+               {% endif %}
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
