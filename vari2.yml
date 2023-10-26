@@ -13,10 +13,11 @@
         - name: Create VLAN
           debug:
             msg: 
-              - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
               - >-
                 {% if lookup('vars', 'TAG_ID_' + item, default='') != '' %}
                 create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} tag {{ lookup('vars', 'TAG_ID_' + item) }}
+                {% else %}
+                create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}
                 {% endif %}
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
