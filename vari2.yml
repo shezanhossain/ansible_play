@@ -9,7 +9,6 @@
       vars:
         vlan_items: "{{ range(1, num_vlans + 1) | map('string') | list }}"
       block:
-
         - name: Create VLAN
           debug:
             msg: "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
