@@ -12,8 +12,6 @@
         vlan_name: "{{ lookup('vars', 'VLAN_NAME_' + item) }}"
         port_num: "{{ lookup('vars', 'PORT_NUM_' + item) }}"
       when: port_num is defined and port_num != ""
-
-      block:
         - name: Debug create vlan
           debug:
             msg: 
