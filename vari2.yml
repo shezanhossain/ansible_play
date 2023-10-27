@@ -7,11 +7,11 @@
   tasks:
     - name: Set VLANs
       loop: "{{ (range(1, num_vlans + 1) | map('string')) | list }}"
-      debug:
-        msg: create vlan {{ lookup("vars", "VLAN_NAME_"+ item) }}
+      set_fact:
+        vlan_msg: "create vlan {{ lookup('vars', 'VLAN_NAME_'+ item) }}"
       register: vlan_output
 
     - name: Save Output to File
       copy:
-        content: "{{ vlan_output.results | map(attribute='stdout') | join('\n') }}"
+        content: "{{ vlan_output.results | map(attribute='ansible_facts.vlan_msg') | join('\n') }}"
         dest: "{{ ansible_playbook_dir }}/output.txt"
