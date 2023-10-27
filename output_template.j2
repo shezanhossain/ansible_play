@@ -1,0 +1,3 @@
+{% for msg in vlan_output.results | map(attribute='ansible_facts.vlan_msg') %}
+{{ msg }}
+{% endfor %}
