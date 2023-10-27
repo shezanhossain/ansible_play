@@ -57,21 +57,18 @@
 
     - name: Save VLAN Output
       set_fact:
-        vlan_output: "{{ vlan_output | default([]) + [item.stdout_lines] }}"
-      loop: "{{ vlan_result.results }}"
-      when: item | success
+        vlan_output: "{{ vlan_output | default([]) + [vlan_result.stdout_lines] }}"
+      when: vlan_result is defined
 
     - name: Save Ports Output
       set_fact:
-        ports_output: "{{ ports_output | default([]) + [item.stdout_lines] }}"
-      loop: "{{ ports_result.results }}"
-      when: item | success
+        ports_output: "{{ ports_output | default([]) + [ports_result.stdout_lines] }}"
+      when: ports_result is defined
 
     - name: Save IP Output
       set_fact:
-        ip_output: "{{ ip_output | default([]) + [item.stdout_lines] }}"
-      loop: "{{ ip_result.results }}"
-      when: item | success
+        ip_output: "{{ ip_output | default([]) + [ip_result.stdout_lines] }}"
+      when: ip_result is defined
 
     - name: Save Outputs to Files
       block:
