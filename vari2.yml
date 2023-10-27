@@ -1,11 +1,48 @@
 ---
-- name: Network Getting started with playbook
+- name: Generate VLAN
   hosts: sw1
   connection: network_cli
   gather_facts: false
-
+  
   tasks:
+    - name: SET VLAN
+      vars:
+        ansible_cfg: ansible.cfg
+        vlan_items: "{{ range(1, num_vlans + 1) | map('string') | list }}"
+      block:
 
-    - name: Debug log path
-      debug:
-        var: ansible_log_path
+        - name: Create VLAN name and TAG
+          exos_config:
+            lines: 
+              - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
+              - >-
+                {% if lookup('vars', 'TAG_ID_' + item, default='') != '' %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} tag {{ lookup('vars', 'TAG_ID_' + item) }}
+                {% endif %}
+          loop: "{{ vlan_items }}"
+
+        - name: Add Ports to VLAN with or without TAG
+          exos_config:
+            lines: 
+              - >-
+                {% if lookup('vars', 'TAGGED_' + item, default='').lower() == 'y' %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} tagged
+                {% else %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} untagged
+                {% endif %}
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
+
+        
+        - name: Allocate VLAN IP 
+          # vlan ip must be set in the quatation (""), like a string
+          exos_config: 
+            lines: 
+              - >-
+                {% if lookup('vars', 'IP_' + item, default='') != '' and lookup('vars', 'SUBNET_' + item, default='') %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} ipaddress {{ lookup('vars', 'IP_' + item) }} {{ lookup('vars', 'SUBNET_' + item) }}
+                {% endif %}
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'IP_' + item, default='') != '' and lookup('vars', 'SUBNET_' + item, default='') != ''
+
+          
