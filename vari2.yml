@@ -12,6 +12,8 @@
       register: vlan_output
 
     - name: Save Output to File
-      template:
-        src: output_template.j2
-        dest: "output.txt"
+      lineinfile:
+        path: "{{ playbook_dir }}/output.txt"
+        line: "{{ item }}"
+        create: yes
+      loop: "{{ vlan_output.results | map(attribute='ansible_facts.vlan_msg') | list }}"
