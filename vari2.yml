@@ -49,24 +49,21 @@
 
           register: ip_result
 
-        - name: Store VLAN Output
-          blockinfile:
-            path: output.txt
-            marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item }}"
-            block: "{{ vlan_result.stdout_lines }}"
+        - name: Save VLAN Output
+          copy:
+            content: "{{ vlan_result.stdout_lines | join('\n') }}"
+            dest: "{{ playbook_dir }}/output_vlan.txt"
           when: vlan_result is defined
 
-        - name: Store Ports Output
-          blockinfile:
-            path: output.txt
-            marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item }}"
-            block: "{{ ports_result.stdout_lines }}"
+        - name: Save Ports Output
+          copy:
+            content: "{{ ports_result.stdout_lines | join('\n') }}"
+            dest: "{{ playbook_dir }}/output_ports.txt"
           when: ports_result is defined
 
-        - name: Store IP Output
-          blockinfile:
-            path: output.txt
-            marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item }}"
-            block: "{{ ip_result.stdout_lines }}"
+        - name: Save IP Output
+          copy:
+            content: "{{ ip_result.stdout_lines | join('\n') }}"
+            dest: "{{ playbook_dir }}/output_ip.txt"
           when: ip_result is defined
 
