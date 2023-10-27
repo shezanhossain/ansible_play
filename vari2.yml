@@ -1,19 +1,19 @@
----
-- name: Generate VLAN
-  hosts: sw1
-  connection: network_cli
-  gather_facts: false
-  
+- name: test
+  hosts: localhost
+  gather_facts: no
   tasks:
-    - name: Set VLANs
-      loop: "{{ (range(1, num_vlans + 1) | map('string')) | list }}"
-      set_fact:
-        vlan_msg: "create vlan {{ lookup('vars', 'VLAN_NAME_'+ item) }}"
-      register: vlan_output
+    - name: use ansible to find path to ansible.cfg
+      shell: "ansible --version | awk -F '= ' '/config file/{print $2}'"
+      register: version_dump
+      failed_when:
+        - version_dump.stdout_lines | length != 1
+        - version_dump.stderr_lines | length != 0
 
-    - name: Save Output to File
-      lineinfile:
-        path: "{{ playbook_dir }}/output.txt"
-        line: "{{ item }}"
-        create: yes
-      loop: "{{ vlan_output.results | map(attribute='ansible_facts.vlan_msg') | list }}"
+    - name: set a fact we can use
+      set_fact:
+        ansible_cfg: "{{ version_dump.stdout }}"
+
+
+    - name: show the value
+      debug:
+        var: ansible_cfg
