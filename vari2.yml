@@ -1,3 +1,11 @@
-- name: Debug log path
-  debug:
-    var: ansible_log_path
+---
+- name: Network Getting started with playbook
+  hosts: sw1
+  connection: network_cli
+  gather_facts: false
+
+  tasks:
+
+    - name: Debug log path
+      debug:
+        var: ansible_log_path
