@@ -50,20 +50,25 @@
           register: ip_result
 
         - name: Save VLAN Output
-          copy:
-            content: "{{ vlan_result.stdout_lines | join('\n') }}"
-            dest: "{{ playbook_dir }}/output_vlan.txt"
-          when: vlan_result is defined
+          always:
+            - name: Store VLAN Output
+              copy:
+                content: "{{ vlan_result.stdout_lines | join('\n') }}"
+                dest: "{{ playbook_dir }}/output_vlan.txt"
+              when: vlan_result is defined
 
         - name: Save Ports Output
-          copy:
-            content: "{{ ports_result.stdout_lines | join('\n') }}"
-            dest: "{{ playbook_dir }}/output_ports.txt"
-          when: ports_result is defined
+          always:
+            - name: Store Ports Output
+              copy:
+                content: "{{ ports_result.stdout_lines | join('\n') }}"
+                dest: "{{ playbook_dir }}/output_ports.txt"
+              when: ports_result is defined
 
         - name: Save IP Output
-          copy:
-            content: "{{ ip_result.stdout_lines | join('\n') }}"
-            dest: "{{ playbook_dir }}/output_ip.txt"
-          when: ip_result is defined
-
+          always:
+            - name: Store IP Output
+              copy:
+                content: "{{ ip_result.stdout_lines | join('\n') }}"
+                dest: "{{ playbook_dir }}/output_ip.txt"
+              when: ip_result is defined
