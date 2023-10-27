@@ -22,11 +22,6 @@
 
           register: vlan_result
 
-        - name: Log VLAN Creation Output
-          ansible.builtin.log:
-            msg: "{{ vlan_result.stdout_lines }}"
-          when: vlan_result is defined
-
         - name: Add Ports to VLAN with or without TAG
           exos_config:
             lines: 
@@ -41,11 +36,6 @@
 
           register: ports_result
 
-        - name: Log VLAN Ports Configuration Output
-          ansible.builtin.log:
-            msg: "{{ ports_result.stdout_lines }}"
-          when: ports_result is defined
-
         - name: Allocate VLAN IP 
           # vlan ip must be set in the quatation (""), like a string
           exos_config: 
@@ -59,9 +49,24 @@
 
           register: ip_result
 
-        - name: Log VLAN IP Allocation Output
-          ansible.builtin.log:
-            msg: "{{ ip_result.stdout_lines }}"
-          when: ip_result is defined
+        - name: Store VLAN Output
+          blockinfile:
+            path: output.txt
+            marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item }}"
+            block: "{{ vlan_result.stdout_lines }}"
+          when: vlan_result is defined
 
+        - name: Store Ports Output
+          blockinfile:
+            path: output.txt
+            marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item }}"
+            block: "{{ ports_result.stdout_lines }}"
+          when: ports_result is defined
+
+        - name: Store IP Output
+          blockinfile:
+            path: output.txt
+            marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item }}"
+            block: "{{ ip_result.stdout_lines }}"
+          when: ip_result is defined
 
