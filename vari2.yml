@@ -43,7 +43,7 @@
                 {% endif %}
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'IP_' + item, default='') != '' and lookup('vars', 'SUBNET_' + item, default='') != ''
-  log_path: ./ansible_log.txt  
+
           
 
           
