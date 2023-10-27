@@ -1,5 +1,6 @@
 ---
 - name: Get Ansible Version
+  hosts: sw1
   become: yes
 
   tasks:
