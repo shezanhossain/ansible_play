@@ -1,6 +1,5 @@
 ---
 - name: Get Ansible Version
-  hosts: localhost
   become: yes
 
   tasks:
