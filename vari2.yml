@@ -19,8 +19,10 @@
                 configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} tag {{ lookup('vars', 'TAG_ID_' + item) }}
                 {% endif %}
           loop: "{{ vlan_items }}"
-
           register: vlan_result
+
+          # Attempt to run task even if there's a connection failure
+          ignore_errors: yes
 
         - name: Add Ports to VLAN with or without TAG
           exos_config:
@@ -33,8 +35,10 @@
                 {% endif %}
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
-
           register: ports_result
+
+          # Attempt to run task even if there's a connection failure
+          ignore_errors: yes
 
         - name: Allocate VLAN IP 
           # vlan ip must be set in the quatation (""), like a string
@@ -46,29 +50,45 @@
                 {% endif %}
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'IP_' + item, default='') != '' and lookup('vars', 'SUBNET_' + item, default='') != ''
-
           register: ip_result
 
+          # Attempt to run task even if there's a connection failure
+          ignore_errors: yes
+
+    - name: Save VLAN Output
+      set_fact:
+        vlan_output: "{{ vlan_output | default([]) + [item.stdout_lines] }}"
+      loop: "{{ vlan_result.results }}"
+      when: item | success
+
+    - name: Save Ports Output
+      set_fact:
+        ports_output: "{{ ports_output | default([]) + [item.stdout_lines] }}"
+      loop: "{{ ports_result.results }}"
+      when: item | success
+
+    - name: Save IP Output
+      set_fact:
+        ip_output: "{{ ip_output | default([]) + [item.stdout_lines] }}"
+      loop: "{{ ip_result.results }}"
+      when: item | success
+
+    - name: Save Outputs to Files
+      block:
         - name: Save VLAN Output
-          always:
-            - name: Store VLAN Output
-              copy:
-                content: "{{ vlan_result.stdout_lines | join('\n') }}"
-                dest: "{{ playbook_dir }}/output_vlan.txt"
-              when: vlan_result is defined
+          copy:
+            content: "{{ item | join('\n') }}"
+            dest: "{{ playbook_dir }}/output_vlan.txt"
+        loop: "{{ vlan_output | default([]) }}"
 
         - name: Save Ports Output
-          always:
-            - name: Store Ports Output
-              copy:
-                content: "{{ ports_result.stdout_lines | join('\n') }}"
-                dest: "{{ playbook_dir }}/output_ports.txt"
-              when: ports_result is defined
+          copy:
+            content: "{{ item | join('\n') }}"
+            dest: "{{ playbook_dir }}/output_ports.txt"
+        loop: "{{ ports_output | default([]) }}"
 
         - name: Save IP Output
-          always:
-            - name: Store IP Output
-              copy:
-                content: "{{ ip_result.stdout_lines | join('\n') }}"
-                dest: "{{ playbook_dir }}/output_ip.txt"
-              when: ip_result is defined
+          copy:
+            content: "{{ item | join('\n') }}"
+            dest: "{{ playbook_dir }}/output_ip.txt"
+        loop: "{{ ip_output | default([]) }}"
