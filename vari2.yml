@@ -1,7 +1,8 @@
 ---
-- name: test
-  hosts: localhost
-  gather_facts: no
+- name: Generate VLAN
+  hosts: sw1
+  connection: network_cli
+  gather_facts: false
   tasks:
     - name: use ansible to find path to ansible.cfg
       shell: "ansible --version | awk -F '= ' '/config file/{print $2}'"
