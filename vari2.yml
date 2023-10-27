@@ -1,4 +1,3 @@
----
 - name: Debug log path
   debug:
     var: ansible_log_path
