@@ -1,13 +1,17 @@
 ---
-- name: Get Ansible Version
+- name: Generate VLAN
   hosts: sw1
-  become: yes
-
+  connection: network_cli
+  gather_facts: false
+  
   tasks:
-    - name: Check Ansible Version
-      command: ansible --version
-      register: ansible_version_output
-
-    - name: Display Ansible Version
+    - name: Set VLANs
+      loop: "{{ (range(1, num_vlans + 1) | map('string')) | list }}"
       debug:
-        var: ansible_version_output.stdout_lines
+        msg: create vlan {{ lookup("vars", "VLAN_NAME_"+ item) }}
+      register: vlan_output
+
+    - name: Save Output to File
+      copy:
+        content: "{{ vlan_output.results | map(attribute='stdout') | join('\n') }}"
+        dest: "{{ ansible_playbook_dir }}/output.txt"
