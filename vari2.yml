@@ -3,19 +3,43 @@
   hosts: sw1
   connection: network_cli
   gather_facts: false
+  
   tasks:
-    - name: use ansible to find path to ansible.cfg
-      shell: "ansible --version | awk -F '= ' '/config file/{print $2}'"
-      register: version_dump
-      failed_when:
-        - version_dump.stdout_lines | length != 1
-        - version_dump.stderr_lines | length != 0
+    - name: SET VLAN
+      vars:
+        vlan_items: "{{ range(1, num_vlans + 1) | map('string') | list }}"
+      block:
 
-    - name: set a fact we can use
-      set_fact:
-        ansible_cfg: "{{ version_dump.stdout }}"
+        - name: Create VLAN name and TAG
+          exos_config:
+            lines: 
+              - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
+              - >-
+                {% if lookup('vars', 'TAG_ID_' + item, default='') != '' %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} tag {{ lookup('vars', 'TAG_ID_' + item) }}
+                {% endif %}
+          loop: "{{ vlan_items }}"
 
+        - name: Add Ports to VLAN with or without TAG
+          exos_config:
+            lines: 
+              - >-
+                {% if lookup('vars', 'TAGGED_' + item, default='').lower() == 'y' %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} tagged
+                {% else %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} untagged
+                {% endif %}
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
 
-    - name: show the value
-      debug:
-        var: ansible_cfg
+        
+        - name: Allocate VLAN IP 
+          # vlan ip must be set in the quatation (""), like a string
+          exos_config: 
+            lines: 
+              - >-
+                {% if lookup('vars', 'IP_' + item, default='') != '' and lookup('vars', 'SUBNET_' + item, default='') %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} ipaddress {{ lookup('vars', 'IP_' + item) }} {{ lookup('vars', 'SUBNET_' + item) }}
+                {% endif %}
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'IP_' + item, default='') != '' and lookup('vars', 'SUBNET_' + item, default='') != ''

@@ -1,0 +1,13 @@
+2023-10-29 19:34:43,889 p=7103 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts as
+an inventory source
+
+2023-10-29 19:34:43,889 p=7103 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-10-29 19:34:43,921 p=7103 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that
+the implicit localhost does not match 'all'
+
+2023-10-29 19:34:44,398 p=7103 u=shezan n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: sw1
+
+2023-10-29 19:34:44,399 p=7103 u=shezan n=ansible | PLAY [Generate VLAN] ***********************************************************
+2023-10-29 19:34:44,399 p=7103 u=shezan n=ansible | skipping: no hosts matched
+2023-10-29 19:34:44,400 p=7103 u=shezan n=ansible | PLAY RECAP *********************************************************************
