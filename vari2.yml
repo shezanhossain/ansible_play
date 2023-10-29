@@ -3,7 +3,7 @@
   hosts: sw1
   connection: network_cli
   gather_facts: false
-  
+
   tasks:
     - name: SET VLAN
       vars:
@@ -32,7 +32,6 @@
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
 
-        
         - name: Allocate VLAN IP 
           # vlan ip must be set in the quatation (""), like a string
           exos_config: 
@@ -43,3 +42,6 @@
                 {% endif %}
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'IP_' + item, default='') != '' and lookup('vars', 'SUBNET_' + item, default='') != ''
+
+  environment:
+    ANSIBLE_LOG_PATH: /home/shezan/ansible-semaphore/ansible_play/ansible_log.txt
