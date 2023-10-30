@@ -1,0 +1,22 @@
+---
+- name: Generate VLAN
+  hosts: sw1
+  connection: network_cli
+  gather_facts: false
+
+  tasks:
+    - name: SET VLAN
+      vars:
+        vlan_items: "{{ range(1, num_vlans + 1) | map('string') | list }}"
+      block:
+
+        - name: Delete VLAN with name or TAG
+          exos_config:
+            lines: 
+              - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
+              - >-
+                {% if lookup('vars', 'VLAN_NAME_' + item, default='') != '' %}
+                delete vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} 
+                {% elif lookup('vars', 'TAG_ID_' + item, default='') != '' %}
+                {% endif %}
+          loop: "{{ vlan_items }}"
