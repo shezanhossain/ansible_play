@@ -17,5 +17,6 @@
                 {% if lookup('vars', 'VLAN_NAME_' + item, default='') != '' %}
                 delete vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} 
                 {% elif lookup('vars', 'TAG_ID_' + item, default='') != '' %}
+                delete vlan {{ lookup('vars', 'TAG_ID_' + item) }} 
                 {% endif %}
           loop: "{{ vlan_items }}"
