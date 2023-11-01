@@ -1,6 +1,6 @@
 ---
 - name: Generate VLAN
-  hosts: sw1
+  hosts: sw
   connection: network_cli
   gather_facts: false
 
@@ -32,14 +32,5 @@
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
 
-        - name: Allocate VLAN IP 
-          # vlan ip must be set in the quatation (""), like a string
-          exos_config: 
-            lines: 
-              - >-
-                {% if lookup('vars', 'IP_' + item, default='') != '' and lookup('vars', 'SUBNET_' + item, default='') %}
-                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} ipaddress {{ lookup('vars', 'IP_' + item) }} {{ lookup('vars', 'SUBNET_' + item) }}
-                {% endif %}
-          loop: "{{ vlan_items }}"
-          when: lookup('vars', 'IP_' + item, default='') != '' and lookup('vars', 'SUBNET_' + item, default='') != ''
+
 
