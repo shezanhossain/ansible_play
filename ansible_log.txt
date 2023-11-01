@@ -11,3 +11,34 @@ the implicit localhost does not match 'all'
 2023-10-29 19:34:44,399 p=7103 u=shezan n=ansible | PLAY [Generate VLAN] ***********************************************************
 2023-10-29 19:34:44,399 p=7103 u=shezan n=ansible | skipping: no hosts matched
 2023-10-29 19:34:44,400 p=7103 u=shezan n=ansible | PLAY RECAP *********************************************************************
+2023-11-01 19:27:27,379 p=25692 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts as
+an inventory source
+
+2023-11-01 19:27:27,380 p=25692 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-01 19:27:27,408 p=25692 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that
+the implicit localhost does not match 'all'
+
+2023-11-01 19:27:28,033 p=25692 u=shezan n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: sw1
+
+2023-11-01 19:27:28,033 p=25692 u=shezan n=ansible | PLAY [Generate VLAN] ***********************************************************
+2023-11-01 19:27:28,033 p=25692 u=shezan n=ansible | skipping: no hosts matched
+2023-11-01 19:27:28,034 p=25692 u=shezan n=ansible | PLAY RECAP *********************************************************************
+2023-11-01 19:28:12,569 p=25697 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts as
+an inventory source
+
+2023-11-01 19:28:12,570 p=25697 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-01 19:28:12,572 p=25697 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that
+the implicit localhost does not match 'all'
+
+2023-11-01 19:28:12,703 p=25697 u=shezan n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: sw1
+
+2023-11-01 19:28:12,703 p=25697 u=shezan n=ansible | PLAY [Generate VLAN] ***********************************************************
+2023-11-01 19:28:12,703 p=25697 u=shezan n=ansible | skipping: no hosts matched
+2023-11-01 19:28:12,703 p=25697 u=shezan n=ansible | PLAY RECAP *********************************************************************
+2023-11-01 19:29:28,171 p=26156 u=shezan n=ansible | PLAY [Generate VLAN] ***********************************************************
+2023-11-01 19:29:28,223 p=26156 u=shezan n=ansible | TASK [Create VLAN name and TAG] ************************************************
+2023-11-01 19:29:28,322 p=26156 u=shezan n=ansible | fatal: [192.168.122.5]: FAILED! => {"msg": "{{ range(1, num_vlans + 1) | map('string') | list }}: 'num_vlans' is undefined. 'num_vlans' is undefined. {{ range(1, num_vlans + 1) | map('string') | list }}: 'num_vlans' is undefined. 'num_vlans' is undefined"}
+2023-11-01 19:29:28,325 p=26156 u=shezan n=ansible | PLAY RECAP *********************************************************************
+2023-11-01 19:29:28,325 p=26156 u=shezan n=ansible | 192.168.122.5              : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
