@@ -9,3 +9,5 @@
     - name: Example from an Ansible Playbook
       ansible.builtin.ping:
         data: ww
+        debug: 
+          msg: ww
