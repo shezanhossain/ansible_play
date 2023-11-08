@@ -42,3 +42,31 @@ the implicit localhost does not match 'all'
 2023-11-01 19:29:28,322 p=26156 u=shezan n=ansible | fatal: [192.168.122.5]: FAILED! => {"msg": "{{ range(1, num_vlans + 1) | map('string') | list }}: 'num_vlans' is undefined. 'num_vlans' is undefined. {{ range(1, num_vlans + 1) | map('string') | list }}: 'num_vlans' is undefined. 'num_vlans' is undefined"}
 2023-11-01 19:29:28,325 p=26156 u=shezan n=ansible | PLAY RECAP *********************************************************************
 2023-11-01 19:29:28,325 p=26156 u=shezan n=ansible | 192.168.122.5              : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-11-08 14:22:28,384 p=17159 u=shezan n=ansible | 192.168.122.5 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to create temporary directory. In some cases, you may have been able to authenticate and did not have permissions on the target directory. Consider changing the remote tmp path in ansible.cfg to a path rooted in \"/tmp\", for more error information use -vvv. Failed command was: ( umask 77 && mkdir -p \"` echo %% Invalid input detected./.ansible/tmp `\"&& mkdir \"` echo %% Invalid input detected./.ansible/tmp/ansible-tmp-1699449747.4696975-17165-255409495891917 `\" && echo ansible-tmp-1699449747.4696975-17165-255409495891917=\"` echo %% Invalid input detected./.ansible/tmp/ansible-tmp-1699449747.4696975-17165-255409495891917 `\" ), exited with result 254, stdout output: %% Unrecognized command:  \"/bin/sh -c '( umask 77 && mkdir -p \"` echo %% Invalid input detected./.ansible/tmp `\"&& mkdir \"` echo %% Invalid input detected./.ansible/tmp/ansible-tmp-1699449747.4696975-17165-255409495891917 `\" && echo ansible-tmp-1699449747.4696975-17165-255409495891917=\"` echo %% Invalid input detected./.ansible/tmp/ansible-tmp-1699449747.4696975-17165-255409495891917 `\" ) && sleep 0'\"\n%% Invalid input detected.\r\n",
+    "unreachable": true
+}
+2023-11-08 14:23:55,427 p=17263 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-
+semaphore/ansible_play/hosts.inv with ini plugin: /home/shezan/ansible-
+semaphore/ansible_play/hosts.inv:2: Expected key=value host variable
+assignment, got: 192.168.122.5
+
+2023-11-08 14:23:55,429 p=17263 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-
+semaphore/ansible_play/hosts.inv as an inventory source
+
+2023-11-08 14:23:55,429 p=17263 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-08 14:23:55,447 p=17263 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that
+the implicit localhost does not match 'all'
+
+2023-11-08 14:24:48,109 p=17323 u=shezan n=ansible | sw2 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: shezan@192.168.122.6: Permission denied (publickey,password).",
+    "unreachable": true
+}
+2023-11-08 14:24:48,383 p=17323 u=shezan n=ansible | sw1 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: shezan@192.168.122.5: Permission denied (publickey,password).",
+    "unreachable": true
+}

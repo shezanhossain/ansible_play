@@ -1,0 +1,10 @@
+---
+- name: Generate VLAN
+  hosts: sw
+  connection: network_cli
+  gather_facts: false
+
+
+    tasks:
+    - name: ping the hosts
+    - ping
