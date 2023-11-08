@@ -1,11 +1,10 @@
 ---
-- name: Generate VLAN
-  hosts: sw
-  connection: network_cli
-  gather_facts: false
 
+- hosts: sw
+  gather_facts: False
+  connection: network_cli
 
   tasks:
-    - name: Induce an exception to see what happens
+
+    - name: Example from an Ansible Playbook
       ansible.builtin.ping:
-      data: crash
