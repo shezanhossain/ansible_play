@@ -14,7 +14,8 @@
           exos_config:
             lines: 
               - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
-
+          loop: "{{ vlan_items }}"
+          
         - name: Configure TAG
           exos_config:
             lines: 
