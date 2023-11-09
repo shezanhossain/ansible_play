@@ -1,0 +1,13 @@
+---
+- name: Test SSH connection to Extreme Switch
+  hosts: sw
+  gather_facts: no
+
+  tasks: 
+    - name: Test for user1
+      local_action: shell ssh shezan@{{ inventory_hostname }} "echo success"
+      register: user1_enabled
+
+    - name: Show registered variable output
+      debug:
+        var: user1_enabled.stdout
