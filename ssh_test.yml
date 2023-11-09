@@ -7,7 +7,7 @@
     - name: Test for user1
       local_action: 
         module: shell
-        args: ssh shezan@{{ inventory_hostname }} "echo success"
+        args: ssh shezan@{{ ansible_host }} "show switch | grep SysName"
       register: user1_enabled
       become: no
 
