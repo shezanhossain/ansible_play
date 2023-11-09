@@ -5,8 +5,11 @@
 
   tasks: 
     - name: Test for user1
-      local_action: shell ssh shezan@{{ inventory_hostname }} "echo success"
+      local_action: 
+        module: shell
+        args: ssh shezan@{{ inventory_hostname }} "echo success"
       register: user1_enabled
+      become: no
 
     - name: Show registered variable output
       debug:
