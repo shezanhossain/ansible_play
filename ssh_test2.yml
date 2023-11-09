@@ -1,8 +1,8 @@
 ---
-- name: Test SSH connection to Extreme Switch
+- name: version check
   hosts: sw
-  gather_facts: no
-
+  connection: network_cli
+  gather_facts: false
 
   tasks:
   - name: run show version on remote devices
