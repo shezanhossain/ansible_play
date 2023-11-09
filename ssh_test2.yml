@@ -4,7 +4,12 @@
   gather_facts: no
 
 
-  tasks: 
-    - name: Debug inventory_hostname
-      debug:
-        var: ansible_host
+  tasks:
+  - name: run show version on remote devices
+    exos_command:
+      commands: show version
+    register: version
+
+  - name: Show registered variable output
+    debug:
+      var: version.stdout
