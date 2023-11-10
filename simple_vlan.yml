@@ -1,6 +1,7 @@
 ---
 - name: Generate
   hosts: all
+  ansible_network_os: exos
   connection: network_cli
   gather_facts: false
 

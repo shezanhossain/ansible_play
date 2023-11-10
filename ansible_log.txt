@@ -325,3 +325,8 @@ semaphore/ansible_play/hosts:1: Expected key=value host variable assignment, got
 2023-11-10 14:57:44,919 p=68132 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
 2023-11-10 14:57:44,920 p=68132 u=shezan n=ansible | sw1                        : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
 2023-11-10 14:57:45,072 p=68141 u=shezan n=ansible | shutdown complete
+2023-11-10 20:24:02,591 p=90124 u=shezan n=ansible | ERROR! Neither the collection requirement entry key 'name', nor 'source' point to a concrete resolvable collection artifact. Also 'name' is not an FQCN. A valid collection name must be in the format <namespace>.<collection>. Please make sure that the namespace and the collection name contain characters from [a-zA-Z0-9_] only.
+
+Could not find community.network~.
+2023-11-10 20:24:11,802 p=90145 u=shezan n=ansible | Starting galaxy collection install process
+2023-11-10 20:24:12,134 p=90145 u=shezan n=ansible | Nothing to do. All requested collections are already installed. If you want to reinstall them, consider using `--force`.
