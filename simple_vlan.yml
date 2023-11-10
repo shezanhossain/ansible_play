@@ -1,10 +1,11 @@
 ---
 - name: Generate
   hosts: all
-  ansible_network_os: exos
   connection: network_cli
   gather_facts: false
 
+  collections:
+    - community.network
   tasks: 
     - name: Create VLAN name 
       community.network.exos_config:
