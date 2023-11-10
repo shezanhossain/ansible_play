@@ -1,4 +1,2 @@
 [sw]
 sw1 ansible_user=shezan ansible_host=192.168.122.5 ansible_network_os=exos
-sw2 ansible_user=shezan ansible_host=192.168.122.6 ansible_network_os=exos
-sw3 ansible_user=shezan ansible_host=192.168.122.7 ansible_network_os=exos

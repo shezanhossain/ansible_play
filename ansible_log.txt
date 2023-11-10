@@ -70,3 +70,18 @@ the implicit localhost does not match 'all'
     "msg": "Failed to connect to the host via ssh: shezan@192.168.122.5: Permission denied (publickey,password).",
     "unreachable": true
 }
+2023-11-10 14:45:39,084 p=67103 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:45:39,284 p=67103 u=shezan n=ansible | TASK [Create VLAN name] *****************************************************************************************************************
+2023-11-10 14:45:44,758 p=67103 u=shezan n=ansible | network_os is set to exos
+2023-11-10 14:45:45,041 p=67103 u=shezan n=ansible | network_os is set to exos
+2023-11-10 14:45:45,084 p=67103 u=shezan n=ansible | network_os is set to exos
+2023-11-10 14:45:47,035 p=67103 u=shezan n=ansible | fatal: [sw1]: FAILED! => {"changed": false, "module_stderr": "ssh connection failed: Failed to authenticate public key: Access denied for 'none'. Authentication that can continue: publickey,password", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error"}
+2023-11-10 14:45:48,011 p=67103 u=shezan n=ansible | fatal: [sw2]: FAILED! => {"changed": false, "module_stderr": "ssh connection failed: Failed to authenticate public key: Access denied for 'none'. Authentication that can continue: publickey,password", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error"}
+2023-11-10 14:45:48,391 p=67103 u=shezan n=ansible | fatal: [sw3]: FAILED! => {"changed": false, "module_stderr": "ssh connection failed: ssh connect failed: No route to host", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error"}
+2023-11-10 14:45:48,403 p=67103 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:45:48,403 p=67103 u=shezan n=ansible | sw1                        : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-11-10 14:45:48,406 p=67103 u=shezan n=ansible | sw2                        : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-11-10 14:45:48,407 p=67103 u=shezan n=ansible | sw3                        : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-11-10 14:45:48,499 p=67127 u=shezan n=ansible | shutdown complete
+2023-11-10 14:45:48,501 p=67126 u=shezan n=ansible | shutdown complete
+2023-11-10 14:45:48,503 p=67121 u=shezan n=ansible | shutdown complete
