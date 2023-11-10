@@ -85,3 +85,243 @@ the implicit localhost does not match 'all'
 2023-11-10 14:45:48,499 p=67127 u=shezan n=ansible | shutdown complete
 2023-11-10 14:45:48,501 p=67126 u=shezan n=ansible | shutdown complete
 2023-11-10 14:45:48,503 p=67121 u=shezan n=ansible | shutdown complete
+2023-11-10 14:47:26,233 p=67278 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:47:26,268 p=67278 u=shezan n=ansible | TASK [Create VLAN name] *****************************************************************************************************************
+2023-11-10 14:47:27,352 p=67278 u=shezan n=ansible | network_os is set to exos
+2023-11-10 14:47:29,748 p=67278 u=shezan n=ansible | fatal: [sw1]: FAILED! => {"changed": false, "module_stderr": "ssh connection failed: Failed to authenticate public key: Access denied for 'none'. Authentication that can continue: publickey,password", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error"}
+2023-11-10 14:47:29,752 p=67278 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:47:29,753 p=67278 u=shezan n=ansible | sw1                        : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-11-10 14:47:29,853 p=67302 u=shezan n=ansible | shutdown complete
+2023-11-10 14:48:17,445 p=67369 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts.inv with ini plugin: /home/shezan/ansible-
+semaphore/ansible_play/hosts.inv:2: Expected key=value host variable assignment, got: cisco
+
+2023-11-10 14:48:17,446 p=67369 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts.inv as an inventory source
+
+2023-11-10 14:48:17,446 p=67369 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:48:17,453 p=67369 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:48:17,880 p=67369 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:48:17,880 p=67369 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:48:17,881 p=67369 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:48:26,676 p=67396 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts.inv with ini plugin: /home/shezan/ansible-
+semaphore/ansible_play/hosts.inv:2: Expected key=value host variable assignment, got: cisco
+
+2023-11-10 14:48:26,676 p=67396 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts.inv as an inventory source
+
+2023-11-10 14:48:26,676 p=67396 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:48:26,685 p=67396 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:48:27,119 p=67396 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:48:27,119 p=67396 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:48:27,119 p=67396 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:48:48,166 p=67412 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts.inv with ini plugin: /home/shezan/ansible-
+semaphore/ansible_play/hosts.inv:2: Expected key=value host variable assignment, got: cisco
+
+2023-11-10 14:48:48,170 p=67412 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts.inv as an inventory source
+
+2023-11-10 14:48:48,180 p=67412 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:48:48,193 p=67412 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:48:48,664 p=67412 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:48:48,671 p=67412 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:48:48,672 p=67412 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:49:28,569 p=67474 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts.inv as an inventory source
+
+2023-11-10 14:49:28,569 p=67474 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:49:28,581 p=67474 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:49:28,791 p=67474 u=shezan n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: sw
+
+2023-11-10 14:49:28,793 p=67474 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:49:28,799 p=67474 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:49:28,801 p=67474 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:49:49,361 p=67502 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts.inv as an inventory source
+
+2023-11-10 14:49:49,362 p=67502 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:49:49,371 p=67502 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:49:50,102 p=67502 u=shezan n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: sw
+
+2023-11-10 14:49:50,104 p=67502 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:49:50,105 p=67502 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:49:50,105 p=67502 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:50:11,273 p=67524 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts.inv as an inventory source
+
+2023-11-10 14:50:11,274 p=67524 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:50:11,280 p=67524 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:50:11,619 p=67524 u=shezan n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: sw
+
+2023-11-10 14:50:11,620 p=67524 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:50:11,620 p=67524 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:50:11,620 p=67524 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:50:29,391 p=67561 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts.inv as an inventory source
+
+2023-11-10 14:50:29,392 p=67561 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:50:29,397 p=67561 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:50:29,584 p=67561 u=shezan n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: sw
+
+2023-11-10 14:50:29,588 p=67561 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:50:29,588 p=67561 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:50:29,588 p=67561 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:51:16,105 p=67626 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts.inv as an inventory source
+
+2023-11-10 14:51:16,105 p=67626 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:51:16,110 p=67626 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:51:16,389 p=67626 u=shezan n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: sw1
+
+2023-11-10 14:51:16,391 p=67626 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:51:16,391 p=67626 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:51:16,397 p=67626 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:52:10,677 p=67721 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts.inv as an inventory source
+
+2023-11-10 14:52:10,677 p=67721 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:52:10,682 p=67721 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:52:10,988 p=67721 u=shezan n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: sw1
+
+2023-11-10 14:52:10,989 p=67721 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:52:10,990 p=67721 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:52:10,990 p=67721 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:52:29,301 p=67759 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with yaml plugin: YAML inventory has invalid structure,
+it should be a dictionary, got: <class 'ansible.parsing.yaml.objects.AnsibleUnicode'>
+
+2023-11-10 14:52:29,303 p=67759 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with ini plugin: /home/shezan/ansible-
+semaphore/ansible_play/hosts:1: Expected key=value host variable assignment, got: cisco
+
+2023-11-10 14:52:29,308 p=67759 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts as an inventory source
+
+2023-11-10 14:52:29,309 p=67759 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:52:29,314 p=67759 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:52:29,515 p=67759 u=shezan n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: sw1
+
+2023-11-10 14:52:29,517 p=67759 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:52:29,517 p=67759 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:52:29,517 p=67759 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:53:09,016 p=67798 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with yaml plugin: YAML inventory has invalid structure,
+it should be a dictionary, got: <class 'ansible.parsing.yaml.objects.AnsibleUnicode'>
+
+2023-11-10 14:53:09,016 p=67798 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with ini plugin: /home/shezan/ansible-
+semaphore/ansible_play/hosts:1: Expected key=value host variable assignment, got: cisco
+
+2023-11-10 14:53:09,016 p=67798 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts as an inventory source
+
+2023-11-10 14:53:09,017 p=67798 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:53:09,022 p=67798 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:53:09,340 p=67798 u=shezan n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: sw1
+
+2023-11-10 14:53:09,342 p=67798 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:53:09,342 p=67798 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:53:09,342 p=67798 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:53:55,571 p=67863 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with yaml plugin: YAML inventory has invalid structure,
+it should be a dictionary, got: <class 'ansible.parsing.yaml.objects.AnsibleUnicode'>
+
+2023-11-10 14:53:55,572 p=67863 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with ini plugin: /home/shezan/ansible-
+semaphore/ansible_play/hosts:1: Expected key=value host variable assignment, got: cisco
+
+2023-11-10 14:53:55,572 p=67863 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts as an inventory source
+
+2023-11-10 14:53:55,573 p=67863 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:53:55,579 p=67863 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:53:55,953 p=67863 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:53:55,954 p=67863 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:53:55,959 p=67863 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:54:26,578 p=67888 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with yaml plugin: YAML inventory has invalid structure,
+it should be a dictionary, got: <class 'ansible.parsing.yaml.objects.AnsibleUnicode'>
+
+2023-11-10 14:54:26,578 p=67888 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with ini plugin: /home/shezan/ansible-
+semaphore/ansible_play/hosts:1: Expected key=value host variable assignment, got: cisco
+
+2023-11-10 14:54:26,579 p=67888 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts as an inventory source
+
+2023-11-10 14:54:26,579 p=67888 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:54:26,585 p=67888 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:54:26,941 p=67888 u=shezan n=ansible | PLAY [Generate VLAN] ********************************************************************************************************************
+2023-11-10 14:54:26,941 p=67888 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:54:26,941 p=67888 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:55:02,338 p=67965 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with yaml plugin: YAML inventory has invalid structure,
+it should be a dictionary, got: <class 'ansible.parsing.yaml.objects.AnsibleUnicode'>
+
+2023-11-10 14:55:02,339 p=67965 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with ini plugin: /home/shezan/ansible-
+semaphore/ansible_play/hosts:1: Expected key=value host variable assignment, got: cisco
+
+2023-11-10 14:55:02,339 p=67965 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts as an inventory source
+
+2023-11-10 14:55:02,340 p=67965 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:55:02,346 p=67965 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:55:02,715 p=67965 u=shezan n=ansible | PLAY [Generate] *************************************************************************************************************************
+2023-11-10 14:55:02,715 p=67965 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:55:02,716 p=67965 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:55:54,512 p=68014 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with yaml plugin: YAML inventory has invalid structure,
+it should be a dictionary, got: <class 'ansible.parsing.yaml.objects.AnsibleUnicode'>
+
+2023-11-10 14:55:54,512 p=68014 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with ini plugin: /home/shezan/ansible-
+semaphore/ansible_play/hosts:1: Expected key=value host variable assignment, got: cisco
+
+2023-11-10 14:55:54,513 p=68014 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts as an inventory source
+
+2023-11-10 14:55:54,513 p=68014 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:55:54,519 p=68014 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:55:55,009 p=68014 u=shezan n=ansible | PLAY [Generate] *************************************************************************************************************************
+2023-11-10 14:55:55,010 p=68014 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:55:55,010 p=68014 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:56:10,812 p=68029 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with yaml plugin: YAML inventory has invalid structure,
+it should be a dictionary, got: <class 'ansible.parsing.yaml.objects.AnsibleUnicode'>
+
+2023-11-10 14:56:10,813 p=68029 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with ini plugin: /home/shezan/ansible-
+semaphore/ansible_play/hosts:1: Expected key=value host variable assignment, got: cisco
+
+2023-11-10 14:56:10,813 p=68029 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts as an inventory source
+
+2023-11-10 14:56:10,813 p=68029 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:56:10,819 p=68029 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:56:10,995 p=68029 u=shezan n=ansible | PLAY [Generate] *************************************************************************************************************************
+2023-11-10 14:56:10,996 p=68029 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:56:10,996 p=68029 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:56:20,792 p=68040 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with yaml plugin: YAML inventory has invalid structure,
+it should be a dictionary, got: <class 'ansible.parsing.yaml.objects.AnsibleUnicode'>
+
+2023-11-10 14:56:20,792 p=68040 u=shezan n=ansible | [WARNING]:  * Failed to parse /home/shezan/ansible-semaphore/ansible_play/hosts with ini plugin: /home/shezan/ansible-
+semaphore/ansible_play/hosts:1: Expected key=value host variable assignment, got: cisco
+
+2023-11-10 14:56:20,793 p=68040 u=shezan n=ansible | [WARNING]: Unable to parse /home/shezan/ansible-semaphore/ansible_play/hosts as an inventory source
+
+2023-11-10 14:56:20,793 p=68040 u=shezan n=ansible | [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2023-11-10 14:56:20,801 p=68040 u=shezan n=ansible | [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2023-11-10 14:56:21,231 p=68040 u=shezan n=ansible | PLAY [Generate] *************************************************************************************************************************
+2023-11-10 14:56:21,232 p=68040 u=shezan n=ansible | skipping: no hosts matched
+2023-11-10 14:56:21,233 p=68040 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:57:20,918 p=68132 u=shezan n=ansible | PLAY [Generate] *************************************************************************************************************************
+2023-11-10 14:57:20,936 p=68132 u=shezan n=ansible | TASK [Create VLAN name] *****************************************************************************************************************
+2023-11-10 14:57:22,192 p=68132 u=shezan n=ansible | network_os is set to exos
+2023-11-10 14:57:44,907 p=68132 u=shezan n=ansible | fatal: [sw1]: FAILED! => {"changed": false, "msg": "create vlan IT\r\n\r\u0007                       ^\r\r\n%% Invalid name detected at '^' marker.\r\n%% Name IT is already in use.\r\r\n* sw1.6 # "}
+2023-11-10 14:57:44,919 p=68132 u=shezan n=ansible | PLAY RECAP ******************************************************************************************************************************
+2023-11-10 14:57:44,920 p=68132 u=shezan n=ansible | sw1                        : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-11-10 14:57:45,072 p=68141 u=shezan n=ansible | shutdown complete

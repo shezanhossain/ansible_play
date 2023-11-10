@@ -1,11 +1,11 @@
 ---
-- name: Generate VLAN
-  hosts: sw
+- name: Generate
+  hosts: all
   connection: network_cli
   gather_facts: false
 
   tasks: 
     - name: Create VLAN name 
-      exos_config:
+      community.network.exos_config:
         lines: 
           - "create vlan IT"
