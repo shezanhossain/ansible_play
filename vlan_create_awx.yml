@@ -1,0 +1,39 @@
+---
+- name: Generate
+  hosts: all
+  connection: network_cli
+  gather_facts: false
+  
+  tasks:
+    - name: SET VLAN
+      vars:
+        vlan_items: "{{ range(1, num_vlans + 1) | map('string') | list }}"
+      block:
+
+        - name: Create VLAN name 
+          community.network.exos_config:
+            lines: 
+              - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
+          loop: "{{ vlan_items }}"
+
+        - name: Configure TAG
+          community.network.exos_config:
+            lines: 
+              - >-
+                {% if lookup('vars', 'TAG_ID_' + item, default='') != '' %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} tag {{ lookup('vars', 'TAG_ID_' + item) }}
+                {% endif %}
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'TAG_ID_' + item, default='') != ''
+          
+        - name: Add Ports to VLAN with or without TAG
+          community.network.exos_config:
+            lines: 
+              - >-
+                {% if lookup('vars', 'TAGGED_' + item, default='').lower() == 'y' %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} tagged
+                {% else %}
+                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} untagged
+                {% endif %}
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
