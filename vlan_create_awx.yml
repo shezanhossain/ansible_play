@@ -1,6 +1,6 @@
 ---
 - name: Generate
-  hosts: all
+  hosts: sw
   connection: network_cli
   gather_facts: false
   
