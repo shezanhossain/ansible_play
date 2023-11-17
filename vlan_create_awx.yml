@@ -11,13 +11,13 @@
       block:
 
         - name: Create VLAN name 
-          community.network.exos_config:
+          exos_config:
             lines: 
               - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
           loop: "{{ vlan_items }}"
 
         - name: Configure TAG
-          community.network.exos_config:
+          exos_config:
             lines: 
               - >-
                 {% if lookup('vars', 'TAG_ID_' + item, default='') != '' %}
@@ -27,7 +27,7 @@
           when: lookup('vars', 'TAG_ID_' + item, default='') != ''
           
         - name: Add Ports to VLAN with or without TAG
-          community.network.exos_config:
+          exos_config:
             lines: 
               - >-
                 {% if lookup('vars', 'TAGGED_' + item, default='').lower() == 'y' %}
