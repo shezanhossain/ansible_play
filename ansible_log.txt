@@ -48540,3 +48540,14 @@ Collection                    Version
 2023-11-11 02:00:34,386 p=112235 u=shezan n=ansible | vultr.cloud                   1.10.0 
 2023-11-11 02:00:34,386 p=112235 u=shezan n=ansible | vyos.vyos                     4.1.0  
 2023-11-11 02:00:34,386 p=112235 u=shezan n=ansible | wti.remote                    1.0.5  
+2023-11-15 17:49:06,886 p=18604 u=shezan n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: sw
+
+2023-11-15 17:49:06,889 p=18604 u=shezan n=ansible | PLAY [Generate] ****************************************************************
+2023-11-15 17:49:06,890 p=18604 u=shezan n=ansible | skipping: no hosts matched
+2023-11-15 17:49:06,890 p=18604 u=shezan n=ansible | PLAY RECAP *********************************************************************
+2023-11-15 17:52:11,326 p=19313 u=shezan n=ansible | PLAY [Generate] ****************************************************************
+2023-11-15 17:52:11,583 p=19313 u=shezan n=ansible | TASK [Create VLAN name] ********************************************************
+2023-11-15 17:52:13,034 p=19313 u=shezan n=ansible | network_os is set to exos
+2023-11-15 17:53:30,914 p=19313 u=shezan n=ansible |  [ERROR]: User interrupted execution
+
+2023-11-15 17:53:42,150 p=19322 u=shezan n=ansible | shutdown complete
