@@ -1,4 +1,8 @@
 ---
 collections:
+  - name: https://github.com/ansible/pylibssh.git
+    type: git
+    version: '0.9.0'
+
   - name: community.network
     source: https://galaxy.ansible.com
