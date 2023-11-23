@@ -11,7 +11,7 @@
       block:
 
         - name: Delete VLAN with name or TAG
-          exos_config:
+          community.network.exos_config:
             lines: 
               - delete vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} 
           loop: "{{ vlan_items }}"
