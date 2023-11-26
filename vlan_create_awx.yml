@@ -3,7 +3,10 @@
   hosts: sw
   connection: network_cli
   gather_facts: false
-  
+
+  collections:
+    - community.network
+
   tasks:
     - name: SET VLAN
       vars:
