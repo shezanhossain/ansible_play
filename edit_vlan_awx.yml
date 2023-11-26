@@ -3,28 +3,16 @@
   hosts: sw
   connection: network_cli
   gather_facts: false
-
+  
   collections:
     - community.network
 
   tasks:
-    - name: Debug for item=1
-      debug: 
-        msg: "Debugging for item=1 - VLAN_NAME_1: {{ VLAN_NAME_1 }}, TAG_ID_1: {{ TAG_ID_1 }}, PORT_NUM_1: {{ PORT_NUM_1 }}"
-      when: item == "1"
-
     - name: SET VLAN
       vars:
         vlan_items: "{{ range(1, num_vlans + 1) | map('string') | list }}"
       block:
-
-        - name: Create VLAN name 
-          community.network.exos_config:
-            lines: 
-              - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
-          loop: "{{ vlan_items }}"
-
-        - name: Configure TAG
+        - name: Edit VLAN TAG COnfiguration
           community.network.exos_config:
             lines: 
               - >-
@@ -34,7 +22,7 @@
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'TAG_ID_' + item, default='') != ''
           
-        - name: Add Ports to VLAN with or without TAG
+        - name: Edit Ports to an Existing VLAN and/or Tagging
           community.network.exos_config:
             lines: 
               - >-
