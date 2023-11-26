@@ -22,10 +22,8 @@
         - name: Configure TAG
           community.network.exos_config:
             lines: 
-              - >-
-                {% if lookup('vars', 'TAG_ID_' + item, default='') != '' %}
-                configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} tag {{ lookup('vars', 'TAG_ID_' + item) }}
-                {% endif %}
+              - configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} tag {{ lookup('vars', 'TAG_ID_' + item) }}
+            
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'TAG_ID_' + item, default='') != ''
           
