@@ -12,9 +12,8 @@
       vars:
         vlan_items: "{{ range(1, num_vlans + 1) | map('string') | list }}"
       block:
-
         - name: Delete VLAN with name or TAG
           community.network.exos_config:
             lines: 
-              - delete vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} 
+              - "delete vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
           loop: "{{ vlan_items }}"
