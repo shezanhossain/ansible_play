@@ -17,7 +17,11 @@
             msg: 
               - "enable eaps"
               - "create eaps {{ lookup('vars', 'EAPS_Name_' + item) }}"
-              - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode {{ 'master' if lookup('vars', 'Mode_' + item, default='').lower() == 'y' else 'transit' }}"
+
+        - name: Eaps Mode Assign
+          debug:
+            msg: 
+              - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode {{ 'master' if lookup('vars', 'Mode_' + item, default='').lower() == "y" else 'transit' }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
 
