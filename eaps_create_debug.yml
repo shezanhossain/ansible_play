@@ -15,16 +15,16 @@
         - name: Eaps Create and Mode Assign
           debug:
             msg: 
-              - enable eaps
-              - create eaps {{ lookup('vars', 'EAPS_Name_' + item) }}
-              - configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode {{ 'master' if lookup('vars', 'master_' + item, default='').lower() == 'y' else 'transit' }}
+              - "enable eaps"
+              - "create eaps {{ lookup('vars', 'EAPS_Name_' + item) }}"
+              - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode {{ 'master' if lookup('vars', 'Mode_' + item, default='').lower() == 'y' else 'transit' }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
 
         - name: Eaps Primary and Secondary Port Assign
           debug:
             msg: 
-              - configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} primary port {{ lookup('vars', 'PRIMARY_PORT_NUM_' + item) }}
-              - configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} secondary port {{ lookup('vars', 'SECONDARY_PORT_NUM_' + item) }}
+              - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} primary port {{ lookup('vars', 'PRIMARY_PORT_NUM_' + item) }}"
+              - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} secondary port {{ lookup('vars', 'SECONDARY_PORT_NUM_' + item) }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
