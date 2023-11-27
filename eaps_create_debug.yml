@@ -1,0 +1,30 @@
+---
+- name: Generate
+  hosts: sw
+  connection: network_cli
+  gather_facts: false
+  
+  collections:
+    - community.network
+
+  tasks:
+    - name: SET EAPS
+      vars:
+        vlan_items: "{{ range(1, num_eaps + 1) | map('string') | list }}"
+      block:
+        - name: Eaps Create and Mode Assign
+          debug:
+            msg: 
+              - enable eaps
+              - create eaps {{ lookup('vars', 'EAPS_Name_' + item) }}
+              - configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode {{ 'master' if lookup('vars', 'master_' + item, default='').lower() == 'y' else 'transit' }}
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
+
+        - name: Eaps Primary and Secondary Port Assign
+          debug:
+            msg: 
+              - configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} primary port {{ lookup('vars', 'PRIMARY_PORT_NUM_' + item) }}
+              - configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} primary port {{ lookup('vars', 'SECONDARY_PORT_NUM_' + item) }}
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
