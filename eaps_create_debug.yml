@@ -32,5 +32,6 @@
             msg: 
               - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} primary port {{ lookup('vars', 'PRIMARY_PORT_NUM_' + item) }}"
               - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} secondary port {{ lookup('vars', 'SECONDARY_PORT_NUM_' + item) }}"
+              - "enable eaps {{ lookup('vars', 'EAPS_Name_' + item) }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
