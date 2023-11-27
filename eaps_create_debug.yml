@@ -17,7 +17,9 @@
             msg: 
               - "enable eaps"
               - "create eaps {{ lookup('vars', 'EAPS_Name_' + item) }}"
-
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
+          
         - name: Eaps Mode Assign
           debug:
             msg: 
