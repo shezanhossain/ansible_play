@@ -26,6 +26,14 @@
               - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode {{ 'master' if lookup('vars', 'Mode_' + item, default='').lower() == 'y' else 'transit' }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
+          
+          expect:
+            command: "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode transit"
+            responses: "Are you sure you want to configure mode to transit? (y/N)": "y"
+            echo: yes
+
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
 
 
         - name: Eaps Primary and Secondary Port Assign
