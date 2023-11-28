@@ -24,8 +24,7 @@
           community.network.exos_config:
             lines: 
               - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode {{ 'master' if lookup('vars', 'Mode_' + item, default='').lower() == 'y' else 'transit' }}"
-            prompt: 'Are you sure you want to configure mode to transit? (y/N)'
-            answer: 'yes'
+              - 'y' 
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
 
