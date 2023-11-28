@@ -12,6 +12,12 @@
       vars:
         vlan_items: "{{ range(1, num_vlans + 1) | map('string') | list }}"
       block:
+        - name: Create VLAN name 
+          exos_config:
+            lines: 
+              - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
+          loop: "{{ vlan_items }}"
+
         - name: Edit VLAN TAG Configuration
           community.network.exos_config:
             lines: 
