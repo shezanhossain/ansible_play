@@ -6,30 +6,33 @@
   
   collections:
     - community.network
-
   tasks:
-    - name: Eaps Mode Assign
-      community.network.exos_config:
-        lines: 
-          - "enable eaps"
-          - "create eaps {{ lookup('vars', 'EAPS_Name_' + item) }}"
-          - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode {{ 'master' if lookup('vars', 'Mode_' + item, default='').lower() == 'y' else 'transit' }}"
-      loop: "{{ vlan_items }}"
-      when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
+    - name: SET EAPS
+      vars:
+        vlan_items: "{{ range(1, num_eaps + 1) | map('string') | list }}"
+      block:
+        - name: Eaps Create and Mode Assign
+          community.network.exos_config:
+            lines: 
+              - "enable eaps"
+              - "create eaps {{ lookup('vars', 'EAPS_Name_' + item) }}"
+              - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode {{ 'master' if lookup('vars', 'Mode_' + item, default='').lower() == 'y' else 'transit' }}"
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
 
-      expect:
-        command: "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode transit"
-        responses:
-          'Are you sure you want to configure mode to transit? (y/N)': 'y'
-        echo: yes
-      loop: "{{ vlan_items }}"
-      when: lookup('vars', 'EAPS_Name_' + item, default='') != '' and lookup('vars', 'Mode_' + item, default='').lower() != 'y'
+          expect:
+            command: "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode transit"
+            responses:
+              'Are you sure you want to configure mode to transit? (y/N)': 'y'
+            echo: yes
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'EAPS_Name_' + item, default='') != '' and lookup('vars', 'Mode_' + item, default='').lower() != 'y'
 
-    - name: Eaps Primary and Secondary Port Assign
-      community.network.exos_config:
-        lines: 
-          - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} primary port {{ lookup('vars', 'PRIMARY_PORT_NUM_' + item) }}"
-          - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} secondary port {{ lookup('vars', 'SECONDARY_PORT_NUM_' + item) }}"
-          - "enable eaps {{ lookup('vars', 'EAPS_Name_' + item) }}"
-      loop: "{{ vlan_items }}"
-      when: lookup('vars', 'EAPS_Name_' + item, default='') != '' and lookup('vars', 'Mode_' + item, default='').lower() == 'y'
+        - name: Eaps Primary and Secondary Port Assign
+          community.network.exos_config:
+            lines: 
+              - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} primary port {{ lookup('vars', 'PRIMARY_PORT_NUM_' + item) }}"
+              - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} secondary port {{ lookup('vars', 'SECONDARY_PORT_NUM_' + item) }}"
+              - "enable eaps {{ lookup('vars', 'EAPS_Name_' + item) }}"
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'EAPS_Name_' + item, default='') != '' and lookup('vars', 'Mode_' + item, default='').lower() == 'y'
