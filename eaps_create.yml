@@ -20,7 +20,7 @@
       expect:
         command: "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode transit"
         responses:
-          "Are you sure you want to configure mode to transit? (y/N)": "y"
+          'Are you sure you want to configure mode to transit? (y/N)': 'y'
         echo: yes
       loop: "{{ vlan_items }}"
       when: lookup('vars', 'EAPS_Name_' + item, default='') != '' and lookup('vars', 'Mode_' + item, default='').lower() != 'y'
