@@ -6,6 +6,7 @@
   
   collections:
     - community.network
+
   tasks:
     - name: SET EAPS
       vars:
@@ -16,17 +17,19 @@
             lines: 
               - "enable eaps"
               - "create eaps {{ lookup('vars', 'EAPS_Name_' + item) }}"
-              - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode {{ 'master' if lookup('vars', 'Mode_' + item, default='').lower() == 'y' else 'transit' }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
 
-          expect:
-            command: "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode transit"
-            responses:
-              'Are you sure you want to configure mode to transit? (y/N)': 'y'
-            echo: yes
+        - name: Eaps Mode Assign
+          community.network.exos_config:
+            lines: 
+              - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode {{ 'master' if lookup('vars', 'Mode_' + item, default='').lower() == 'y' else 'transit' }}"
+            prompt: 'Are you sure you want to configure mode to transit? (y/N)'
+            answer: 'yes'
           loop: "{{ vlan_items }}"
-          when: lookup('vars', 'EAPS_Name_' + item, default='') != '' and lookup('vars', 'Mode_' + item, default='').lower() != 'y'
+          when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
+
+
 
         - name: Eaps Primary and Secondary Port Assign
           community.network.exos_config:
@@ -35,4 +38,4 @@
               - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} secondary port {{ lookup('vars', 'SECONDARY_PORT_NUM_' + item) }}"
               - "enable eaps {{ lookup('vars', 'EAPS_Name_' + item) }}"
           loop: "{{ vlan_items }}"
-          when: lookup('vars', 'EAPS_Name_' + item, default='') != '' and lookup('vars', 'Mode_' + item, default='').lower() == 'y'
+          when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
