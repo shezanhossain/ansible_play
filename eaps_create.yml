@@ -20,11 +20,11 @@
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
 
-        - name: Eaps Mode Assign with Expect
-          expect:
-            command: "community.network.exos_config lines='configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode {{ 'master' if lookup('vars', 'Mode_' + item, default='').lower() == 'y' else 'transit' }}'"
-            responses:
-              '(?i)Are you sure you want to configure mode to transit\\?': 'y'
+        - name: Eaps Mode Assign (disabled cli prompting)
+          community.network.exos_config:
+            lines:
+              - "disable cli prompting" 
+              - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode {{ 'master' if lookup('vars', 'Mode_' + item, default='').lower() == 'y' else 'transit' }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
 
