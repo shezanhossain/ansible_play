@@ -19,6 +19,7 @@
               - "create eaps {{ lookup('vars', 'EAPS_Name_' + item) }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
+          ignore_errors: True
 
         - name: Eaps Mode Assign (disabled cli prompting)
           community.network.exos_config:
@@ -27,6 +28,7 @@
               - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} mode {{ 'master' if lookup('vars', 'Mode_' + item, default='').lower() == 'y' else 'transit' }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
+          ignore_errors: True
 
         - name: Eaps Primary and Secondary Port Assign
           community.network.exos_config:
@@ -36,3 +38,4 @@
               - "enable eaps {{ lookup('vars', 'EAPS_Name_' + item) }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
+          ignore_errors: True

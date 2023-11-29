@@ -17,17 +17,20 @@
             lines: 
               - "create vlan {{ lookup('vars', 'VLAN_NAME_' + item) }}"
           loop: "{{ vlan_items }}"
+          ignore_errors: True
 
-        - name: Edit VLAN TAG Configuration
+        - name: Configure VLAN TAG Configuration
           community.network.exos_config:
             lines: 
               - "configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} tag {{ lookup('vars', 'TAG_ID_' + item) }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'TAG_ID_' + item, default='') != ''
+          ignore_errors: True
 
-        - name: Edit Ports to an Existing VLAN and/or Tagging
+        - name: Configure Ports to VLAN and/or Tagging
           community.network.exos_config:
             lines: 
               - "configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} {{ 'tagged' if lookup('vars', 'TAGGED_' + item, default='').lower() == 'y' else 'untagged' }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
+          ignore_errors: True
