@@ -10,7 +10,7 @@
   tasks:
     - name: SET EAPS
       vars:
-        vlan_items: "{{ range(1, num_eaps + 1) | map('string') | list }}"
+        vlan_items: "{{ range(1, num_eaps_vlan + 1) | map('string') | list }}"
       block:
         - name: Eaps Create and Mode Assign
           community.network.exos_config:
