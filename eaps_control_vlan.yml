@@ -1,0 +1,21 @@
+---
+- name: Generate
+  hosts: sw
+  connection: network_cli
+  gather_facts: false
+  
+  collections:
+    - community.network
+
+  tasks:
+    - name: SET EAPS
+      vars:
+        vlan_items: "{{ range(1, num_eaps + 1) | map('string') | list }}"
+      block:
+        - name: Eaps Create and Mode Assign
+          community.network.exos_config:
+            lines: 
+              - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} add control vlan {{ lookup('vars', 'EAPS_Control_VLAN_' + item) }}"
+          loop: "{{ vlan_items }}"
+          when: lookup('vars', 'EAPS_Name_' + item, default='') != ''
+          ignore_errors: True
