@@ -13,8 +13,8 @@
         vlan_items: "{{ range(1, num_eaps_vlan + 1) | map('string') | list }}"
       block:
         - name: Eaps Create and Mode Assign
-          debug:
-            msg: 
+          community.network.exos_config:
+            lines: 
               - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} add {{ lookup('vars', 'EAPS_Type_' + item) }} vlan {{ lookup('vars', 'EAPS_VLAN_Name_' + item) }}"
           loop: "{{ vlan_items }}"
           ignore_errors: True
