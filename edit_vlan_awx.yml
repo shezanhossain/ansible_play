@@ -23,7 +23,7 @@
         - name: Edit Ports to an Existing VLAN and/or Tagging
           community.network.exos_config:
             lines: 
-              - "configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} {{ 'tagged' if lookup('vars', 'TAGGED_' + item, default='').lower() == 'y' else 'untagged' }}"
+              - "configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} add ports {{ lookup('vars', 'PORT_NUM_' + item) }} {{ lookup('vars', 'TAGGED_' + item) }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'PORT_NUM_' + item, default='') != ''
           ignore_errors: True
