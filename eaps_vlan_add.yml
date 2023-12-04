@@ -15,6 +15,6 @@
         - name: Eaps Create and Mode Assign
           debug:
             msg: 
-              - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} add {{ lookup('vars', 'EAPS_Type_' + item) }} vlan {{ lookup('vars', 'EAPS_VLAN_NAME_' + item) }}"
+              - "configure eaps {{ lookup('vars', 'EAPS_Name_' + item) }} add {{ lookup('vars', 'EAPS_Type_' + item) }} vlan {{ lookup('vars', 'EAPS_VLAN_Name_' + item) }}"
           loop: "{{ vlan_items }}"
           ignore_errors: True
