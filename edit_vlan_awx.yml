@@ -15,6 +15,7 @@
         - name: Edit VLAN TAG Configuration
           community.network.exos_config:
             lines: 
+              - "disable cli prompting"
               - "configure vlan {{ lookup('vars', 'VLAN_NAME_' + item) }} tag {{ lookup('vars', 'TAG_ID_' + item) }}"
           loop: "{{ vlan_items }}"
           when: lookup('vars', 'TAG_ID_' + item, default='') != ''
