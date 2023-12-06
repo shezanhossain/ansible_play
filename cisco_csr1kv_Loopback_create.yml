@@ -1,0 +1,17 @@
+---
+- name: Generate
+  hosts: cisco
+  connection: network_cli
+  gather_facts: false
+
+  tasks:
+    - name: SET Loopback Interface
+      vars:
+        vlan_items: "{{ range(1, num_Loopback + 1) | map('string') | list }}"
+      block:
+        - name: Create Loopback Interface
+          ios_config:
+            parents: "interface loopback {{ lookup('vars', 'Loopback_ID_' + item) }}"
+              lines: 
+                - "ip address {{ lookup('vars', 'Loopback_IP_' + item) }} {{ lookup('vars', 'Loopback_Subnet_' + item) }}"
+          loop: "{{ vlan_items }}"
