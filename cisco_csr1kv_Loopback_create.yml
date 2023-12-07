@@ -1,6 +1,6 @@
 ---
 - name: Generate
-  hosts: cisco
+  hosts: CSR1kv
   connection: network_cli
   gather_facts: false
 
