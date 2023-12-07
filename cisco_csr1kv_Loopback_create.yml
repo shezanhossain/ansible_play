@@ -10,7 +10,7 @@
         vlan_items: "{{ range(1, num_Loopback + 1) | map('string') | list }}"
       block:
         - name: Create Loopback Interface
-          ios_config:
+          cisco.ios.ios_config:
             parents: "interface loopback {{ lookup('vars', 'Loopback_ID_' + item) }}"
             lines: 
               - "ip address {{ lookup('vars', 'Loopback_IP_' + item) }} {{ lookup('vars', 'Loopback_Subnet_' + item) }}"
