@@ -1,0 +1,13 @@
+---
+- name: Gather Fact
+  hosts: sw
+  gather_facts: no
+
+  tasks: 
+    - name: Gather the config facts
+      community.network.exos_facts:
+        gather_subnet: config    
+
+    - name: Show registered variable output
+      debug:
+        var: config.stdout
