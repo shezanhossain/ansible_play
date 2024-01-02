@@ -1,0 +1,17 @@
+---
+- name: Show config
+  hosts: sw
+  connection: network_cli
+  gather_facts: false
+
+  tasks:
+    - name: Get switch configuration
+      exos_command:
+        commands: show config
+      register: config_output
+
+    - set_fact:
+        switch_outputs: "{{ switch_outputs | default({}) | combine({ inventory_hostname: config_output.stdout }) }}"
+
+    - debug:
+        var: switch_outputs
