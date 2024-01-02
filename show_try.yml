@@ -7,7 +7,7 @@
   tasks:
     - name: Get switch configuration
       exos_command:
-        commands: show config
+        commands: show config vlan
       register: config_output
 
     - set_fact:
