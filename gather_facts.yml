@@ -6,8 +6,9 @@
   tasks: 
     - name: Gather the config facts
       community.network.exos_facts:
-        gather_subset: config    
+        gather_subset: all
+      register: all_subset   
 
-    - name: Show registered variable output
+    - name: Print Subset All
       debug:
-        var: config.stdout
+        var: all_subset
