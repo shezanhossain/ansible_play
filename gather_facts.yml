@@ -6,7 +6,7 @@
   tasks: 
     - name: Gather the config facts
       community.network.exos_facts:
-        gather_subnet: config    
+        gather_subset: config    
 
     - name: Show registered variable output
       debug:
