@@ -7,7 +7,7 @@
   tasks:
   - name: Show config
     community.network.exos_command:
-      commands: show config
+      commands: show config vlan
     register: config
 
   - name: Save Output
