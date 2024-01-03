@@ -10,6 +10,7 @@
       commands: show config vlan
     register: config
 
-  - name: Save Output
-    debug:
-      var: config.stdout
+  - name: Save Output to ~/network-prog/backups/
+    copy: 
+      content: "{{config.stdout[0]}}"
+      dest: "~/network-prog/backups/{{inventory_hostname}}"
