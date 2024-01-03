@@ -10,7 +10,7 @@
       commands: show config vlan
     register: config_result
 
-  - name: Format and Display Config
+  - name: Display Config to sort
     debug:
       msg: |
-        {{ ansible_hostname }} @@@ {{ config_result.stdout[0] }}
+        {{ ansible_hostname }} @@@ {{ config_result.stdout[0] }} @@@
