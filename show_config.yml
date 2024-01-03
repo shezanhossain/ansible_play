@@ -13,4 +13,4 @@
   - name: Save Output to ~/network-prog/backups/
     copy: 
       content: "{{config.stdout[0]}}"
-      dest: "~/var/lib/awx{{inventory_hostname}}"
+      dest: "tmp/test/{{inventory_hostname}}"
