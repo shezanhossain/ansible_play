@@ -37,7 +37,7 @@
 
     - name: Push file to GitHub
       uri:
-        url: "https://api.github.com/repos/{{ github_repo_owner }}/{{ github_repo_name }}/contents/it_{{ inventory_hostname }}.txt"
+        url: "https://api.github.com/repos/{{ github_repo_owner }}/{{ github_repo_name }}/it_{{ inventory_hostname }}.txt"
         method: PUT
         headers:
           Authorization: "token {{ github_token }}"
@@ -46,7 +46,8 @@
           message: "Adding it_{{ inventory_hostname }}.txt"
           content: "{{ file_content['content'] | b64encode }}"
       register: github_push_result
-
+      delegate_to: localhost
+      become: false
     - name: Debug GitHub push result
       debug:
         var: github_push_result
