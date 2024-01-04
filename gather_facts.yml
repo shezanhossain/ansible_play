@@ -34,7 +34,8 @@
       slurp:
         path: "{{ local_file_path }}"
       register: file_content
-
+      delegate_to: localhost
+      become: false
     - name: Push file to GitHub
       uri:
         url: "https://api.github.com/repos/{{ github_repo_owner }}/{{ github_repo_name }}/it_{{ inventory_hostname }}.txt"
