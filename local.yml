@@ -1,8 +1,9 @@
 ---
 - name: Display localhost information
-  hosts: localhost
-  gather_facts: true
+  hosts: all
+  gather_facts: false
   tasks:
     - name: Display localhost details
       debug:
         msg: "This is {{ ansible_hostname }} with IP address {{ ansible_default_ipv4.address }}"
+      delegate_to:localhost
