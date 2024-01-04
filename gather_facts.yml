@@ -14,27 +14,6 @@
       commands: show config vlan
     register: config
 
-  vars:
-    github_repo_owner: "shezanhossain"  # Replace with your GitHub username or organization name
-    github_repo_name: "ansible_play"  # Replace with your GitHub repository name
-    github_token: "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"  # Replace with your GitHub Personal Access Token
-    file_content: "{{ config.stdout[0] }}"  # Assuming 'config' stores the output
-
-
-  tasks:
-    - name: Push file content to GitHub
-      uri:
-        url: "https://api.github.com/repos/{{ github_repo_owner }}/{{ github_repo_name }}/contents/vlan_config.txt"
-        method: PUT
-        headers:
-          Authorization: "token {{ github_token }}"
-        body_format: json
-        body:
-          message: "Adding VLAN configuration"
-          content: "{{ file_content | b64encode }}"
-      register: github_push_result
-
-
-    - name: Debug GitHub push result
-      debug:
-        var: github_push_result
+  - name: debug 
+    debug: 
+      var: config.stdout[0]
