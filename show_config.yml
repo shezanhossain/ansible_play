@@ -1,16 +1,18 @@
 ---
-- name: Show config
+- name: Show config and save result
   hosts: sw
   connection: network_cli
   gather_facts: false
 
   tasks:
-  - name: Show config
-    community.network.exos_command:
-      commands: show config vlan
-    register: config_result
+    - name: Show config
+      community.network.exos_command:
+        commands: show config vlan
+      register: config_result
 
-  - name: Format and Display Config
-    debug:
-      msg: |
-        {{ ansible_hostname }} @@@ {{ config_result.stdout[0] }}
+    - name: Save config result to localhost
+      delegate_to: localhost
+      when: config_result is defined  # Only run this task if config_result is defined
+      ansible.builtin.copy:
+        content: "{{ config_result }}"  # Save the result as content
+        dest: "/tmp/config_result.txt"  # Destination path on localhost
