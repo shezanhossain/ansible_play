@@ -10,10 +10,26 @@
         commands: show config vlan
       register: config_result
 
-    - name: Save config result to localhost
-      when: config_result is defined  
-      ansible.builtin.copy:
-        content: "{{ config_result }}"  
-        dest: "~/config_result.txt"  
+    - name: ensure backup folder
+      file: 
+        path: "{{ backup_root }}"
+        state: directory
+      run_once: yes
+
+    - name: ensure device folder is created 
+      file: 
+        path: "{{ backup_root }}/{{ inventory_hostname }}"
+        state: directory
+
+    - name: get timestamp
+      command: date +%Y%m%d
+      register: timestamp
+
+    - name: get/copy backup
+      copy: 
+        content: "{{ config_result.stdout[0] }}"
+        dest: " {{ backup_root }}/{{ inventory_hostname }}/running_config_{{timestamp.stdout}} "
       delegate_to: localhost
-      become: yes
+
+
+    
