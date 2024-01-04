@@ -8,19 +8,17 @@
     - community.network
 
 
-  vars:
-    github_repo_owner: "shezanhossain"  # Replace with your GitHub username or organization name
-    github_repo_name: "ansible_play"  # Replace with your GitHub repository name
-    github_token: "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"  # Replace with your GitHub Personal Access Token
-    file_content: "{{ config.stdout[0] }}"  # Assuming 'config' stores the output
-
-
-
   tasks:
   - name: Show config
     community.network.exos_command:
       commands: show config vlan
     register: config
+
+  vars:
+    github_repo_owner: "shezanhossain"  # Replace with your GitHub username or organization name
+    github_repo_name: "ansible_play"  # Replace with your GitHub repository name
+    github_token: "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"  # Replace with your GitHub Personal Access Token
+    file_content: "{{ config.stdout[0] }}"  # Assuming 'config' stores the output
 
 
   tasks:
