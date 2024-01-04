@@ -4,11 +4,35 @@
   connection: network_cli
   gather_facts: false
 
+
+  vars: 
+    backup_with_tags: false
+    backup_dir: "{{ playbook_dir }}"/net_backups"
+    backup_file: "{{ backup_dir}}/{{inventory_hostname}}"
+    backup_repo: git@github.com:shezanhossain/ansible_play.git
+    git_name: shezanhossain
+    git_email: shezan_hossain.mahmud@smail.th-koeln.de
+
+  tasks:
+  - import_role: 
+      name: network_backup_git 
+
+
+  vars_files: 
+    secrets.yml
+
   tasks:
   - name: Show config
     community.network.exos_command:
       commands: show config vlan
     register: config_result
+
+
+
+
+
+
+
 
   - name: Display Config to sort
     debug:

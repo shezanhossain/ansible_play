@@ -4,6 +4,11 @@
   connection: network_cli
   gather_facts: false
 
+  vars: 
+    backup_root: ./backups
+
+
+
   tasks:
     - name: Show config
       community.network.exos_command:

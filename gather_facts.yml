@@ -1,14 +1,20 @@
 ---
-- name: Gather Fact
+- name: Generate
   hosts: sw
-  gather_facts: no
+  connection: network_cli
+  gather_facts: false
+  
+  collections:
+    - community.network
 
-  tasks: 
-    - name: Gather the config facts
-      community.network.exos_facts:
-        gather_subset: all
-      register: all_subset   
+  tasks:
+  - name: Show config
+    community.network.exos_command:
+      commands: show config vlan
+    register: config
 
-    - name: Print Subset All
-      debug:
-        var: all_subset
+  - name: SAVE OUTPUT TO ./backups/
+    copy:
+      content: "{{ config.stdout[0] }}"
+      dest: "tmp/test/it_{{ inventory_hostname }}.txt"
+    
