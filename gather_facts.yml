@@ -17,3 +17,4 @@
     copy:
       content: "{{ config.stdout[0] }}"
       dest: "/tmp/test/it_{{ inventory_hostname }}.txt"
+    delegate_to: localhost
