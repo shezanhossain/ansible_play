@@ -13,4 +13,4 @@
   - name: Display Config to sort
     debug:
       msg: |
-        {{ ansible_hostname }} @@@ {{ config_result.stdout[0] }} @@@
+        {{ inventory_hostname }} @@@ {{ config_result.stdout[0] }} @@@
