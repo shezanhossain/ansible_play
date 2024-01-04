@@ -11,8 +11,9 @@
       register: config_result
 
     - name: Save config result to localhost
-      when: config_result is defined  # Only run this task if config_result is defined
+      when: config_result is defined  
       ansible.builtin.copy:
-        content: "{{ config_result }}"  # Save the result as content
-        dest: "~/config_result.txt"  # Destination path on localhost
+        content: "{{ config_result }}"  
+        dest: "~/config_result.txt"  
       delegate_to: localhost
+      become: yes
