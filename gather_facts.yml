@@ -7,48 +7,36 @@
   collections:
     - community.network
 
+
+  vars:
+    github_repo_owner: "shezanhossain"  # Replace with your GitHub username or organization name
+    github_repo_name: "ansible_play"  # Replace with your GitHub repository name
+    github_token: "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"  # Replace with your GitHub Personal Access Token
+    file_content: "{{ config.stdout[0] }}"  # Assuming 'config' stores the output
+
+
+
   tasks:
   - name: Show config
     community.network.exos_command:
       commands: show config vlan
     register: config
 
-  - name: SAVE OUTPUT TO ./backups/
-    copy:
-      content: "{{ config.stdout[0] }}"
-      dest: "/tmp/it_{{ inventory_hostname }}.txt"
-    delegate_to: localhost
-    become: false
-
-##############################
-
-
-  vars:
-    github_repo_owner: "shezanhossain"  # Replace with your GitHub username or organization name
-    github_repo_name: "ansible_play"  # Replace with your GitHub repository name
-    github_token: "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"  # Replace with your GitHub Personal Access Token
-    local_file_path: "/tmp/it_{{ inventory_hostname }}.txt"
 
   tasks:
-    - name: Read content of the local file
-      slurp:
-        path: "{{ local_file_path }}"
-      register: file_content
-      delegate_to: localhost
-      become: false
-    - name: Push file to GitHub
+    - name: Push file content to GitHub
       uri:
-        url: "https://api.github.com/repos/{{ github_repo_owner }}/{{ github_repo_name }}/it_{{ inventory_hostname }}.txt"
+        url: "https://api.github.com/repos/{{ github_repo_owner }}/{{ github_repo_name }}/contents/vlan_config.txt"
         method: PUT
         headers:
           Authorization: "token {{ github_token }}"
         body_format: json
         body:
-          message: "Adding it_{{ inventory_hostname }}.txt"
-          content: "{{ file_content['content'] | b64encode }}"
+          message: "Adding VLAN configuration"
+          content: "{{ file_content | b64encode }}"
       register: github_push_result
-      delegate_to: localhost
-      become: false
+
+
     - name: Debug GitHub push result
       debug:
         var: github_push_result
