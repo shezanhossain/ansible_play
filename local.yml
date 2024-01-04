@@ -6,4 +6,4 @@
     - name: Display localhost details
       debug:
         msg: "This is {{ ansible_hostname }} with IP address {{ ansible_default_ipv4.address }}"
-      delegate_to:localhost
+      delegate_to: localhost
