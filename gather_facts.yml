@@ -19,3 +19,34 @@
       dest: "/tmp/it_{{ inventory_hostname }}.txt"
     delegate_to: localhost
     become: false
+
+##############################
+
+
+  vars:
+    github_repo_owner: "shezanhossain"  # Replace with your GitHub username or organization name
+    github_repo_name: "ansible_play"  # Replace with your GitHub repository name
+    github_token: "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"  # Replace with your GitHub Personal Access Token
+    local_file_path: "/tmp/it_{{ inventory_hostname }}.txt"
+
+  tasks:
+    - name: Read content of the local file
+      slurp:
+        path: "{{ local_file_path }}"
+      register: file_content
+
+    - name: Push file to GitHub
+      uri:
+        url: "https://api.github.com/repos/{{ github_repo_owner }}/{{ github_repo_name }}/contents/it_{{ inventory_hostname }}.txt"
+        method: PUT
+        headers:
+          Authorization: "token {{ github_token }}"
+        body_format: json
+        body:
+          message: "Adding it_{{ inventory_hostname }}.txt"
+          content: "{{ file_content['content'] | b64encode }}"
+      register: github_push_result
+
+    - name: Debug GitHub push result
+      debug:
+        var: github_push_result
