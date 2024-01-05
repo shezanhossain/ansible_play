@@ -1,11 +1,17 @@
 ---
-- name: Create a file in /tmp directory
+- name: Create and rename a file in /tmp directory
   hosts: localhost  # Assuming you're running this playbook on the local machine
   gather_facts: no
   become: false
 
   tasks:
+    - name: Create and rename a file
+      command: mv /tmp/new_file.txt /tmp/kotha_file.txt
+      args:
+        creates: /tmp/kotha_file.txt
+      changed_when: false
+
     - name: Create a file
       file:
-        path: /tmp/test/new_file.txt
+        path: /tmp/new_file.txt
         state: touch
