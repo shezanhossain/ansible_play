@@ -32,21 +32,25 @@
             src: /tmp/kotha_file2.txt  # Replace with the path of the file to be pushed
             dest: /ansible_play/backups/kotha_file2.txt  # Replace with the path in the repository
           when: not ansible_check_mode
+          become: true
 
         - name: Add file to git
           command: git add kotha_file2.txt
           args:
             chdir: /ansible_play/backups
           when: not ansible_check_mode
+          become: true
 
         - name: Commit changes
           command: git commit -m "Adding kotha_file2.txt"
           args:
             chdir: /ansible_play/backups
           when: not ansible_check_mode
+          become: true
 
         - name: Push changes to GitHub
           command: git push origin master
           args:
             chdir: /ansible_play/backups
           when: not ansible_check_mode
+          become: true
