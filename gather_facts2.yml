@@ -20,6 +20,10 @@
           changed_when: false
           when: not ansible_check_mode
 
+        - name: Add exception for /tmp directory in Git
+          command: git config --global --add safe.directory /tmp
+          when: not ansible_check_mode
+
         - name: push to git
           shell: "{{ item }}"
           args: 
