@@ -20,37 +20,15 @@
           changed_when: false
           when: not ansible_check_mode
 
-        - name: Clone GitHub repository
-          git:
-            repo: https://shezanhossain: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@github.com/shezanhossain/ansible_play.git # Replace with your GitHub repository URL
-            dest: /ansible_play/backups  # Replace with the directory where you want to clone the repository
-            version: master  # Replace with the branch you want to work on
-          when: not ansible_check_mode
-
-        - name: Copy file to repository
-          copy:
-            src: /tmp/kotha_file2.txt  # Replace with the path of the file to be pushed
-            dest: /ansible_play/backups/kotha_file2.txt  # Replace with the path in the repository
-          when: not ansible_check_mode
-          become: true
-
-        - name: Add file to git
-          command: git add kotha_file2.txt
-          args:
-            chdir: /ansible_play/backups
-          when: not ansible_check_mode
-          become: true
-
-        - name: Commit changes
-          command: git commit -m "Adding kotha_file2.txt"
-          args:
-            chdir: /ansible_play/backups
-          when: not ansible_check_mode
-          become: true
-
-        - name: Push changes to GitHub
-          command: git push origin master
-          args:
-            chdir: /ansible_play/backups
-          when: not ansible_check_mode
-          become: true
+        - name: push to git
+          shell: "{{ item }}"
+          args: 
+            chdir: /tmp/
+          loop: 
+            - git config --global user.name "shezanhossain"
+            - git config --global user.email shezan_hossain.mahmud@smail.th-koeln.de
+            - git init
+            - git remote add origin https://shezanhossain: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@github.com/shezanhossain/awx_try_push.git
+            - git add *
+            - git commit -m "try1"
+            - git push origin master
