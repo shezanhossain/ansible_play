@@ -23,7 +23,7 @@
         - name: push to git
           shell: "{{ item }}"
           args: 
-            chdir: /tmp/
+            chdir: /tmp
           loop: 
             - git config --global user.name "shezanhossain"
             - git config --global user.email shezan_hossain.mahmud@smail.th-koeln.de
