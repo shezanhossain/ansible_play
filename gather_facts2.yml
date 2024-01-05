@@ -32,7 +32,7 @@
             - git config --global user.name "shezanhossain"
             - git config --global user.email shezan_hossain.mahmud@smail.th-koeln.de
             - git init
-            - git remote add origin https://shezanhossain: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@github.com/shezanhossain/awx_try2.git
+            - git remote add origin https://shezanhossain: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@github.com/shezanhossain/every.git
             - git add *
-            - git commit -m "try2"
+            - git commit -m "try3"
             - git push origin master
