@@ -5,13 +5,14 @@
   become: false
 
   tasks:
-    - name: Create and rename a file
-      command: mv /tmp/new_file.txt /tmp/kotha_file.txt
+    - name: Create a file new2_file.txt
+      file:
+        path: /tmp/new2_file.txt
+        state: touch
+
+    - name: Rename new2_file.txt to kotha_file.txt
+      command: mv /tmp/new2_file.txt /tmp/kotha_file.txt
       args:
         creates: /tmp/kotha_file.txt
       changed_when: false
-
-    - name: Create a file
-      file:
-        path: /tmp/new_file.txt
-        state: touch
+      when: not ansible_check_mode
