@@ -7,13 +7,15 @@
   collections:
     - community.network
 
-
   tasks:
   - name: Show config
     community.network.exos_command:
       commands: show config vlan
     register: config
 
-  - name: debug 
-    debug: 
-      var: config.stdout[0]
+  - name: SAVE OUTPUT TO ./backups/
+    copy:
+      content: "{{ config.stdout[0] }}"
+      dest: "/var/lib/awx/projects/it_{{ inventory_hostname }}.txt"
+    delegate_to: localhost
+    become: false
