@@ -22,7 +22,7 @@
 
         - name: Clone GitHub repository
           git:
-            repo: https://github.com/shezanhossain/ansible_play.git # Replace with your GitHub repository URL
+            repo: https://shezanhossain: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@github.com/shezanhossain/ansible_play.git # Replace with your GitHub repository URL
             dest: /ansible_play/backups  # Replace with the directory where you want to clone the repository
             version: master  # Replace with the branch you want to work on
           when: not ansible_check_mode
