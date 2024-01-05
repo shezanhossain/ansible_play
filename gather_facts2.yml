@@ -3,9 +3,9 @@
   hosts: localhost  # Assuming you're running this playbook on the local machine
   gather_facts: no
   become: false
-  
+
   tasks:
     - name: Create a file
       file:
-        path: /tmp/new_file.txt
+        path: /tmp/test/new_file.txt
         state: touch
