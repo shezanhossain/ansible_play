@@ -1,18 +1,52 @@
 ---
-- name: Create and rename a file in /tmp directory
+- name: Create, rename, and push a file to GitHub repo
   hosts: localhost  # Assuming you're running this playbook on the local machine
   gather_facts: no
   become: false
 
   tasks:
-    - name: Create a file new2_file.txt
-      file:
-        path: /tmp/new2_file.txt
-        state: touch
+    - name: Create a file new3_file.txt and push to GitHub
+      block:
+        - name: Create a file new3_file.txt
+          file:
+            path: /tmp/new3_file.txt
+            state: touch
+          when: not ansible_check_mode
 
-    - name: Rename new2_file.txt to kotha_file.txt
-      command: mv /tmp/new2_file.txt /tmp/kotha_file.txt
-      args:
-        creates: /tmp/kotha_file.txt
-      changed_when: false
-      when: not ansible_check_mode
+        - name: Rename new3_file.txt to kotha_file2.txt
+          command: mv /tmp/new3_file.txt /tmp/kotha_file2.txt
+          args:
+            creates: /tmp/kotha_file2.txt
+          changed_when: false
+          when: not ansible_check_mode
+
+        - name: Clone GitHub repository
+          git:
+            repo: https://github.com/shezanhossain/ansible_play.git # Replace with your GitHub repository URL
+            dest: /ansible_play/backups  # Replace with the directory where you want to clone the repository
+            version: master  # Replace with the branch you want to work on
+          when: not ansible_check_mode
+
+        - name: Copy file to repository
+          copy:
+            src: /tmp/kotha_file2.txt  # Replace with the path of the file to be pushed
+            dest: /ansible_play/backups/kotha_file2.txt  # Replace with the path in the repository
+          when: not ansible_check_mode
+
+        - name: Add file to git
+          command: git add kotha_file2.txt
+          args:
+            chdir: /ansible_play/backups
+          when: not ansible_check_mode
+
+        - name: Commit changes
+          command: git commit -m "Adding kotha_file2.txt"
+          args:
+            chdir: /ansible_play/backups
+          when: not ansible_check_mode
+
+        - name: Push changes to GitHub
+          command: git push origin master
+          args:
+            chdir: /ansible_play/backups
+          when: not ansible_check_mode
