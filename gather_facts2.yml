@@ -6,3 +6,4 @@
   tasks:
     - name: Rename file using command module
       command: mv /tmp/it_sw1.txt /tmp/it_core1.txt
+      become: false
