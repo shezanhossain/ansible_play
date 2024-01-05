@@ -1,0 +1,8 @@
+---
+- name: Rename file it_sw1.txt to it_core1.txt
+  hosts: localhost  # Assuming you're running this playbook on the local machine
+  gather_facts: no
+
+  tasks:
+    - name: Rename file using command module
+      command: mv /tmp/it_sw1.txt /tmp/it_core1.txt
